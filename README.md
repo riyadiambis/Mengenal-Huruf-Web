@@ -1,59 +1,98 @@
 # Ayo Belajar Huruf! 🎈
 
-Aplikasi web edukasi interaktif untuk anak usia TK hingga SD kelas 1 untuk belajar mengenal huruf A sampai Z dan melatih kemampuan membaca kata seru secara bertahap, langsung dari browser HP tanpa instalasi aplikasi.
+Aplikasi belajar membaca untuk anak TK sampai SD kelas 1. Buka satu link, langsung bisa dipakai. Tidak perlu unduh aplikasi, tidak perlu daftar akun, tidak ada iklan.
+
+[🚀 Coba sekarang](https://riyadiambis.github.io/Mengenal-Huruf-Web/)
 
 ---
 
-## 🚀 Cara Menjalankan
+## Kenapa aplikasi ini dibuat
 
-1. Buka file `index.html` langsung di browser mana pun (Google Chrome, Safari, Microsoft Edge, Mozilla Firefox).
-2. Atau jika sudah di-deploy, kunjungi tautan: `https://riyadiambis.github.io/web-membaca/`
+Aplikasi ini lahir dari kelas les yang beneran, bukan dari ide di atas kertas.
 
-> **Catatan**: Aplikasi ini 100% *client-side* (HTML + Vanilla CSS + JavaScript dalam 1 file tunggal). Tidak butuh server, tidak butuh database, dan tidak memerlukan dependensi build tools (`npm`, `vite`, dll.).
+Saya mengajar dua anak yang levelnya berbeda jauh. Yang satu daya tangkapnya cepat tapi gampang bosan, satunya lagi tekun tapi butuh banyak pengulangan sebelum sesuatu nempel di ingatan. Aplikasi belajar huruf yang ada di luar sana rata-rata memaksa keduanya lewat jalur yang sama: mulai dari A, lanjut B, lanjut C, sampai Z.
 
----
+Padahal anak yang baru kenal 5 huruf nggak butuh 26 kartu. Dia butuh 5 huruf itu diulang sampai benar-benar hafal.
 
-## 🌐 Cara Publish ke GitHub Pages
-
-Aplikasi ini dirancang khusus agar siap di-hosting secara gratis di GitHub Pages:
-
-1. Buat repository baru di GitHub (misalnya: `web-membaca`).
-2. Push / upload file `index.html` dan `README.md` ke branch `main`.
-3. Di halaman GitHub repository, buka menu **Settings** ⚙️ → **Pages**.
-4. Di bagian **Build and deployment** > **Source**:
-   - Pilih `Deploy from a branch`
-   - Branch: `main` dan folder: `/ (root)`
-5. Klik **Save**. Dalam 1–2 menit, website sudah online dan dapat diakses langsung melalui link GitHub Pages!
+Jadi aplikasi ini dibangun dengan satu prinsip: guru yang menentukan sejauh mana anak berlatih hari ini, bukan aplikasinya.
 
 ---
 
-## ✨ Fitur & Aturan Pedagogis
+## Fitur
 
-### 1. 🔤 Mode Kenalan Huruf
-- Menampilkan kartu huruf besar (A–Z) disertai contoh benda ramah anak dan emoji visual.
-- **Pengaturan Rentang Huruf**: Guru atau orang tua dapat membatasi rentang latihan (contoh: hanya huruf A sampai E) menggunakan dropdown dan deretan tombol pill horizontal.
-- **Suara Indonesia**: Melafalkan huruf dan nama bendanya dengan intonasi ramah anak melalui Text-to-Speech bawaan browser.
+### 🔤 Kenalan Huruf
+Kartu huruf besar dengan contoh benda dan emoji. Anak menekan huruf, aplikasi menyebutkan bunyinya dengan suara Bahasa Indonesia.
 
-### 2. 🎯 Mode Tebak Huruf
-- Kuis pilihan ganda interaktif: menebak huruf awal dari emoji benda dengan 3 pilihan huruf chunky.
-- **Aturan Anti-Huruf Berdekatan (Domain Rule A)**: Sistem mencatat 4 huruf jawaban terakhir (FIFO). Huruf yang baru saja keluar tidak akan diulang berturut-turut kecuali rentang huruf yang dipilih guru terlalu sempit.
-- **Umpan Balik Positif**: Dilengkapi skor bintang (⭐), efek suara Web Audio API, dan animasi haptic responsif tanpa menyalahkan anak saat salah memilih.
+Guru bisa mengatur rentang latihan, misalnya hanya A sampai E. Huruf yang belum diajarkan tidak akan muncul sama sekali, jadi anak tidak kewalahan.
 
-### 3. 📖 Mode Baca Kata (3 Tingkat Kesulitan)
-- **🌱 Level 1 - Suku Kata**:
-  - Flashcard suku kata satu per satu (bukan daftar yang di-scroll).
-  - Urutan kartu selalu diacak ulang menggunakan algoritma **Fisher-Yates** setiap kali dibuka (**Domain Rule B**).
-  - Tombol **"Sudah Paham"** (**Domain Rule C**): Kartu yang sudah dikuasai disembunyikan selama 2 jam dan disimpan aman di `localStorage` (dengan pengaman `try-catch`).
-- **🚀 Level 2 - Kata 4 Huruf**:
-  - Melengkapi 1 huruf yang hilang (`_`) pada kata 4 huruf umum (contoh: `B O _ A`).
-  - Posisi huruf yang dikosongkan diacak setiap soal (**Domain Rule D**). Pilihan huruf terdiri dari 1 jawaban benar dan 2 pengecoh acak yang tidak kembar.
-- **🏆 Level 3 - Kata Panjang (5–6 Huruf)**:
-  - Format sama dengan Level 2 dengan kata yang lebih panjang (contoh: `K A _ C I L`).
+### 🎯 Tebak Huruf
+Kuis pilihan ganda. Muncul emoji benda, anak memilih huruf awalnya dari tiga pilihan, lalu mengumpulkan bintang.
+
+Nama bendanya hanya disebutkan lewat suara dan tidak ditulis di layar. Ini disengaja. Kalau tulisannya ikut ditampilkan, anak cukup menyalin huruf pertamanya tanpa benar-benar mengenali bentuk huruf.
+
+### 📖 Baca Kata (3 tingkat)
+Naik bertahap sesuai kesiapan anak:
+
+| Level | Latihan | Contoh |
+| :--- | :--- | :--- |
+| 🌱 Level 1 | Suku kata, satu kartu per layar | BA, SU, MI |
+| 🚀 Level 2 | Melengkapi huruf hilang pada kata 4 huruf | B O _ A |
+| 🏆 Level 3 | Kata yang lebih panjang | K A _ C I L |
+
+Di Level 1 ada tombol "Sudah Paham". Suku kata yang sudah dikuasai anak akan disembunyikan selama dua jam, jadi waktu belajar tidak habis untuk mengulang hal yang sudah bisa.
 
 ---
 
-## 🎨 Spesifikasi Desain & UX
-- **Mobile First**: Lebar konten optimal maksimum ~440px, nyaman digenggam dan dioperasikan satu tangan di HP.
-- **Chunky 3D Tactile Buttons**: Tombol dengan efek border tebal dan bayangan timbul yang terasa menekan saat disentuh.
-- **Buku Tulis Bergaris**: Background grid kotak-kotak lembut seperti buku matematika anak sekolah.
-- **Tipografi Ramah Anak**: Menggunakan font Google Fonts *Fredoka* dan *Nunito*.
+## Yang membedakan aplikasi ini
+
+Sebagian besar aplikasi sejenis mengacak soal dengan satu baris Math.random(). Kelihatannya acak, tapi di lapangan sering bikin masalah. Aplikasi ini punya beberapa aturan yang dipegang ketat:
+
+- **Huruf tidak muncul berdekatan.** Sistem mengingat beberapa huruf jawaban terakhir dan tidak mengulangnya. Anak tidak akan dapat huruf yang sama tiga kali berturut-turut lalu menebak asal karena sudah hafal polanya.
+- **Urutan kartu selalu berubah.** Setiap kali dibuka, urutan kartu diacak ulang. Anak tidak bisa menghafal "setelah BA pasti BI" tanpa benar-benar membaca kartunya.
+- **Posisi huruf yang hilang berpindah-pindah.** Huruf yang dikosongkan tidak selalu di awal atau di akhir kata, jadi anak harus membaca kata utuhnya dulu.
+- **Salah tidak dihukum.** Tidak ada tombol yang mati, tidak ada nyawa yang habis, tidak ada suara gagal yang bikin ciut. Anak boleh mencoba lagi di soal yang sama sampai berhasil.
+
+---
+
+## Cocok untuk siapa
+
+- Guru les dan bimbel yang mengajar beberapa anak dengan level berbeda dalam satu sesi
+- Orang tua yang ingin menemani anak belajar huruf tanpa harus menyiapkan bahan sendiri
+- Anak TK sampai SD kelas 1 yang sedang di tahap mengenal huruf dan merangkai suku kata
+
+---
+
+## Cara pakai
+
+Buka [linknya](https://riyadiambis.github.io/Mengenal-Huruf-Web/) di HP, lalu:
+
+1. Masuk ke **Kenalan Huruf**, atur rentang huruf sesuai yang sudah diajarkan ke anak
+2. Biarkan anak bermain di **Tebak Huruf** untuk menguji huruf yang sama
+3. Kalau anak sudah lancar, lanjut ke **Baca Kata** mulai dari Level 1
+
+Satu sesi 15 sampai 20 menit biasanya sudah cukup untuk anak seusia ini.
+
+---
+
+## Catatan teknis
+
+- Dibangun sebagai satu file HTML statis dengan Vanilla CSS dan JavaScript. Tanpa framework, tanpa build step, tanpa backend, tanpa database.
+- Suara memakai Text-to-Speech bawaan browser, jadi tidak ada file audio yang perlu diunduh. Kualitas suaranya mengikuti suara Bahasa Indonesia yang tersedia di perangkat masing-masing.
+- Progres "Sudah Paham" disimpan di penyimpanan lokal browser, bukan di server. Artinya data tetap ada di HP itu saja dan tidak dikirim ke mana pun.
+
+---
+
+## Menjalankan di komputer sendiri
+
+```bash
+git clone https://github.com/riyadiambis/Mengenal-Huruf-Web.git
+cd Mengenal-Huruf-Web
+```
+
+Lalu buka `index.html` di browser. Selesai, tidak ada langkah lain.
+
+---
+
+## Lisensi
+
+Bebas dipakai dan dimodifikasi untuk keperluan mengajar.
