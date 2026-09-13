@@ -486,6 +486,33 @@
       box-shadow: 0 2px 0 var(--navy);
     }
 
+    .btn-reset-session {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background-color: var(--white);
+      color: var(--slate-600);
+      border: 2px solid var(--navy);
+      border-radius: 9999px;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      font-family: 'Fredoka', cursive, sans-serif;
+      box-shadow: 0 2px 0 var(--navy);
+      cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .btn-reset-session:hover {
+      background-color: #fee2e2;
+      color: var(--coral-dark);
+    }
+
+    .btn-reset-session:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 var(--navy);
+    }
+
     .quiz-question-prompt {
       font-family: 'Nunito', sans-serif;
       font-size: 1rem;
@@ -846,8 +873,6 @@
             <select id="tebak-select-end" onchange="onTebakRangeChange()"></select>
           </div>
         </div>
-        <!-- Scrollable Letter Pills -->
-        <div class="pill-scroll" id="tebak-pill-scroll"></div>
       </div>
 
       <!-- Quiz Card -->
@@ -858,6 +883,9 @@
             <span style="color: #f59e0b; font-size: 1.1rem;">⭐</span>
             <span id="tebak-score-val">0</span> Bintang
           </div>
+          <button type="button" class="btn-reset-session" id="btn-tebak-reset" onclick="resetTebakSession()" title="Mulai ulang sesi tebak huruf">
+            <span>🔄</span> Mulai Ulang
+          </button>
         </div>
 
         <!-- Mascot & Question Text -->
@@ -1307,7 +1335,6 @@
 
       selStart.value = 0;
       selEnd.value = 25;
-      renderTebakPills();
     }
 
     function onTebakRangeChange() {
@@ -1323,22 +1350,21 @@
       document.getElementById('tebak-range-badge').textContent = 
         `${ALPHABET_DATA[tebakStartIdx].char} - ${ALPHABET_DATA[tebakEndIdx].char}`;
 
-      renderTebakPills();
       generateQuizQuestion();
     }
 
-    function renderTebakPills() {
-      const container = document.getElementById('tebak-pill-scroll');
-      container.innerHTML = '';
+    function resetTebakSession() {
+      const confirmed = window.confirm('Mulai ulang sesi latihan dari awal? Skor bintang akan kembali ke 0.');
+      if (!confirmed) return;
 
-      for (let i = tebakStartIdx; i <= tebakEndIdx; i++) {
-        const item = ALPHABET_DATA[i];
-        const span = document.createElement('span');
-        span.className = 'letter-pill';
-        span.style.cursor = 'default';
-        span.textContent = item.char;
-        container.appendChild(span);
-      }
+      tebakScore = 0;
+      tebakQuestionCount = 1;
+      tebakRecentAnswers = [];
+
+      document.getElementById('tebak-score-val').textContent = '0';
+      document.getElementById('tebak-soal-indicator').textContent = 'Soal 1';
+
+      generateQuizQuestion();
     }
 
     // Penerapan ATURAN DOMAIN A secara presisi
