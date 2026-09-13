@@ -161,27 +161,45 @@
       width: 100%;
     }
 
-    .sub-nav {
-      display: flex;
-      gap: 0.35rem;
+    .sub-nav-wrapper {
+      position: relative;
       width: 100%;
       margin-bottom: 0.25rem;
+    }
+
+    /* Petunjuk visual: gradasi tipis di tepi kanan saat masih ada pill tersembunyi */
+    .sub-nav-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 4px;
+      width: 36px;
+      background: linear-gradient(to right, rgba(247, 251, 254, 0), var(--bg-paper));
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+      z-index: 2;
+    }
+
+    .sub-nav-wrapper.at-end::after {
+      opacity: 0;
+    }
+
+    .sub-nav {
+      display: flex;
+      gap: 0.45rem;
+      width: 100%;
       overflow-x: auto;
-      padding: 0.1rem 0 0.35rem;
+      padding: 0.2rem 0.25rem 0.45rem;
       scrollbar-width: none;
+      -ms-overflow-style: none;
       -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
     }
 
     .sub-nav::-webkit-scrollbar {
       display: none;
-    }
-
-    @media (min-width: 400px) {
-      .sub-nav {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        overflow-x: visible;
-      }
     }
 
     /* ==========================================================================
@@ -219,33 +237,27 @@
     }
 
     .btn-sublevel {
-      flex: 1 0 auto;
-      min-width: 64px;
-      padding: 0.45rem 0.2rem;
-      font-size: 0.72rem;
-      font-weight: 800;
-      border-radius: 0.85rem;
-      min-height: 52px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.12rem;
+      flex-shrink: 0;
       white-space: nowrap;
+      padding: 0.5rem 0.95rem;
+      font-size: 0.84rem;
+      font-weight: 800;
+      border-radius: 9999px;
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      line-height: 1;
+    }
+
+    .btn-sublevel .lvl-tag {
+      font-weight: 900;
+      color: inherit;
     }
 
     .btn-sublevel .lvl-title {
-      font-weight: 800;
-      font-size: 0.74rem;
-      line-height: 1.1;
-    }
-
-    .btn-sublevel .lvl-subtext {
-      display: block;
       font-weight: 700;
-      font-size: 0.64rem;
-      opacity: 0.9;
-      line-height: 1.1;
+      color: inherit;
     }
 
     .btn-sublevel.active {
@@ -1151,27 +1163,29 @@
          ======================================================================== -->
     <section id="pane-baca" class="tab-pane hidden" style="flex-direction: column; gap: 0.75rem;">
       <!-- Sub-Level Tabs (5 Levels) -->
-      <div class="sub-nav" aria-label="Pilih Tingkat Level" data-purpose="level-navigation">
-        <button type="button" class="btn-3d btn-sublevel active" id="btn-lvl-1" onclick="switchBacaLevel(1)">
-          <span class="lvl-title">🌱 Lvl 1</span>
-          <span class="lvl-subtext">Kenal Suku</span>
-        </button>
-        <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-2" onclick="switchBacaLevel(2)">
-          <span class="lvl-title">🧩 Lvl 2</span>
-          <span class="lvl-subtext">Lengkapi Suku</span>
-        </button>
-        <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-3" onclick="switchBacaLevel(3)">
-          <span class="lvl-title">🚀 Lvl 3</span>
-          <span class="lvl-subtext">4 Huruf</span>
-        </button>
-        <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-4" onclick="switchBacaLevel(4)">
-          <span class="lvl-title">🏆 Lvl 4</span>
-          <span class="lvl-subtext">Panjang</span>
-        </button>
-        <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-5" onclick="switchBacaLevel(5)">
-          <span class="lvl-title">🧱 Lvl 5</span>
-          <span class="lvl-subtext">Susun Huruf</span>
-        </button>
+      <div class="sub-nav-wrapper" id="sub-nav-wrapper">
+        <div class="sub-nav" id="sub-nav-scroll" aria-label="Pilih Tingkat Level" data-purpose="level-navigation" onscroll="updateSubNavScrollIndicator()">
+          <button type="button" class="btn-3d btn-sublevel active" id="btn-lvl-1" onclick="switchBacaLevel(1)">
+            <span class="lvl-tag">🌱 Level 1</span>
+            <span class="lvl-title">Kenal Suku Kata</span>
+          </button>
+          <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-2" onclick="switchBacaLevel(2)">
+            <span class="lvl-tag">🧩 Level 2</span>
+            <span class="lvl-title">Lengkapi Suku Kata</span>
+          </button>
+          <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-3" onclick="switchBacaLevel(3)">
+            <span class="lvl-tag">🚀 Level 3</span>
+            <span class="lvl-title">Kata 4 Huruf</span>
+          </button>
+          <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-4" onclick="switchBacaLevel(4)">
+            <span class="lvl-tag">🏆 Level 4</span>
+            <span class="lvl-title">Kata Panjang</span>
+          </button>
+          <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-5" onclick="switchBacaLevel(5)">
+            <span class="lvl-tag">🧱 Level 5</span>
+            <span class="lvl-title">Susun Huruf</span>
+          </button>
+        </div>
       </div>
 
       <!-- Session Length Selector Card (Aturan H) -->
@@ -2127,6 +2141,18 @@
       startBacaSession();
     }
 
+    function updateSubNavScrollIndicator() {
+      const scrollEl = document.getElementById('sub-nav-scroll');
+      const wrapper = document.getElementById('sub-nav-wrapper');
+      if (!scrollEl || !wrapper) return;
+      const isAtEnd = scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 8;
+      if (isAtEnd) {
+        wrapper.classList.add('at-end');
+      } else {
+        wrapper.classList.remove('at-end');
+      }
+    }
+
     // Pemilihan Level Baca Kata (1 sampai 5)
     function switchBacaLevel(levelNum) {
       currentBacaLevel = levelNum;
@@ -2136,12 +2162,19 @@
         if (btn) {
           if (i === levelNum) {
             btn.classList.add('active');
+            // Otomatis scroll pill yang aktif ke posisi terlihat (scrollIntoView)
+            btn.scrollIntoView({
+              behavior: 'smooth',
+              inline: 'center',
+              block: 'nearest'
+            });
           } else {
             btn.classList.remove('active');
           }
         }
       }
 
+      setTimeout(updateSubNavScrollIndicator, 350);
       startBacaSession();
     }
 
@@ -2187,8 +2220,11 @@
     function chooseAnotherLevel() {
       document.getElementById('subpane-baca-result').classList.add('hidden');
       switchBacaLevel(1);
-      const nav = document.querySelector('.sub-nav');
-      if (nav) nav.scrollIntoView({ behavior: 'smooth' });
+      const scrollEl = document.getElementById('sub-nav-scroll');
+      if (scrollEl) {
+        scrollEl.scrollTo({ left: 0, behavior: 'smooth' });
+      }
+      setTimeout(updateSubNavScrollIndicator, 350);
     }
 
     /* --------------------------------------------------------------------------
@@ -2792,6 +2828,7 @@
         generateQuizQuestion();
       } else if (tabName === 'baca') {
         switchBacaLevel(currentBacaLevel);
+        setTimeout(updateSubNavScrollIndicator, 200);
       }
     }
 
@@ -2801,6 +2838,8 @@
     window.addEventListener('DOMContentLoaded', () => {
       initKenalanSelectors();
       initTebakSelectors();
+      window.addEventListener('resize', updateSubNavScrollIndicator);
+      setTimeout(updateSubNavScrollIndicator, 250);
     });
   </script>
 </body>
