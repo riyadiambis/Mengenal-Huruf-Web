@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Ayo Belajar Huruf! - Baca Kata</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandNavy: '#16385c',
+            brandBorder: '#14314f',
+            brandYellow: '#ffd643',
+            brandTeal: '#059669',
+            brandTealDark: '#047857',
+            gridLine: 'rgba(56, 137, 197, 0.18)',
+            softBlueBg: '#f6fbfe'
+          },
+          fontFamily: {
+            fredoka: ['"Fredoka"', 'system-ui', 'sans-serif'],
+            comic: ['"Nunito"', 'system-ui', 'sans-serif']
+          },
+          boxShadow: {
+            'pop': '0px 5px 0px #14314f',
+            'pop-sm': '0px 3px 0px #14314f',
+            'pop-inner': 'inset 0px -4px 0px rgba(0,0,0,0.15)'
+          }
+        }
+      }
+    };
+  </script>
+<!-- Google Fonts for Friendly Chunky Kids Typography -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-grid-background">
+    /* Blueprint / Notepad Graph Paper Background Pattern */
+    .notepad-grid {
+      background-color: #f7faff;
+      background-image: 
+        linear-gradient(to right, rgba(78, 142, 196, 0.22) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(78, 142, 196, 0.22) 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+  </style>
+<style data-purpose="tactile-buttons">
+    /* Tactile chunky border-bottom button effect */
+    .chunky-btn {
+      border: 3px solid #14314f;
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 0 #14314f;
+      transition: all 0.12s ease-in-out;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .chunky-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #14314f;
+    }
+    .chunky-card {
+      border: 3.5px solid #14314f;
+      border-radius: 2rem;
+      box-shadow: 0 6px 0 #14314f;
+    }
+  </style>
+</head>
+<body class="notepad-grid font-fredoka min-h-screen text-[#16385c] flex justify-center items-start p-3 sm:p-5 select-none antialiased">
+<!-- BEGIN: MobileDeviceContainer -->
+<!-- Container is styled precisely for mobile iOS viewports (~390px to 440px) -->
+<main class="w-full max-w-[430px] flex flex-col items-center py-4 relative" data-purpose="app-viewport">
+<!-- BEGIN: HeaderSection -->
+<header class="w-full text-center mb-5" data-purpose="page-header">
+<!-- Title with Highlight and Decorative Elements -->
+<div class="inline-block relative">
+<h1 class="text-3xl sm:text-[34px] font-extrabold tracking-wide text-brandNavy flex items-center justify-center gap-1.5">
+<span>Ayo Belajar</span>
+<span class="relative inline-block px-1">
+<span class="relative z-10">Huruf!</span>
+<!-- Yellow Highlighter marker background -->
+<span class="absolute left-0 bottom-1.5 w-full h-3.5 bg-yellow-300 opacity-90 rounded-sm -z-0"></span>
+</span>
+<!-- Fun decorative playful balloon badge -->
+<span class="text-xl -mt-4 animate-bounce">🎈</span>
+</h1>
+</div>
+<p class="text-[13px] sm:text-[14px] font-semibold text-slate-500 mt-1 font-comic tracking-tight">
+        Kenal huruf A sampai Z, terus belajar baca kata
+      </p>
+</header>
+<!-- END: HeaderSection -->
+<!-- BEGIN: MainNavTabs -->
+<!-- Top 3 Primary Mode Switchers -->
+<nav aria-label="Mode Belajar" class="w-full grid grid-cols-3 gap-2 sm:gap-2.5 mb-3" data-purpose="primary-navigation">
+<!-- Tab 1: Kenalan Huruf -->
+<button class="chunky-btn bg-white hover:bg-slate-50 text-[13px] sm:text-[14px] font-bold py-2.5 px-1 text-brandNavy flex items-center justify-center leading-tight" type="button">
+        Kenalan Huruf
+      </button>
+<!-- Tab 2: Tebak Huruf -->
+<button class="chunky-btn bg-white hover:bg-slate-50 text-[13px] sm:text-[14px] font-bold py-2.5 px-1 text-brandNavy flex items-center justify-center leading-tight" type="button">
+        Tebak Huruf
+      </button>
+<!-- Tab 3: Baca Kata (Active Tab) -->
+<button class="chunky-btn bg-brandYellow hover:brightness-105 text-[13px] sm:text-[14px] font-extrabold py-2.5 px-1 text-brandNavy flex items-center justify-center leading-tight" type="button">
+        Baca Kata
+      </button>
+</nav>
+<!-- END: MainNavTabs -->
+<!-- BEGIN: LevelSubTabs -->
+<!-- Sub-navigation for reading levels -->
+<section aria-label="Tingkat Kesulitan" class="w-full grid grid-cols-3 gap-2 sm:gap-2.5 mb-4" data-purpose="level-navigation">
+<!-- Level 1 -->
+<button class="chunky-btn bg-white hover:bg-slate-50 text-[11px] sm:text-[12px] font-bold py-2 px-1 text-slate-700 leading-tight flex flex-col justify-center items-center min-h-[52px]" type="button">
+<span>Level 1 -</span>
+<span>Suku Kata</span>
+</button>
+<!-- Level 2 (Active highlighted in teal as in reference) -->
+<button class="chunky-btn bg-[#0d9488] hover:bg-[#0f766e] text-white text-[11px] sm:text-[12px] font-extrabold py-2 px-1 leading-tight flex flex-col justify-center items-center min-h-[52px] shadow-pop" type="button">
+<span>Level 2 - Kata</span>
+<span>4 Huruf</span>
+</button>
+<!-- Level 3 -->
+<button class="chunky-btn bg-white hover:bg-slate-50 text-[11px] sm:text-[12px] font-bold py-2 px-1 text-slate-700 leading-tight flex flex-col justify-center items-center min-h-[52px]" type="button">
+<span>Level 3 - Kata</span>
+<span>Panjang</span>
+</button>
+</section>
+<!-- END: LevelSubTabs -->
+<!-- BEGIN: InteractiveCard -->
+<!-- Main Tactile Card for Word Quiz Game -->
+<section class="w-full bg-white chunky-card p-5 sm:p-6 mb-5 relative flex flex-col items-center" data-purpose="quiz-interactive-card">
+<!-- Card Top Bar: Progress and Star Score Badge -->
+<div class="w-full flex items-center justify-between mb-4 relative" data-purpose="card-header">
+<!-- Spacer for visual symmetry -->
+<div class="w-12"></div>
+<!-- Progress Indicator -->
+<span class="text-[15px] sm:text-[16px] font-bold text-slate-600 font-comic" id="progress-indicator">
+          Kata 2 dari 4
+        </span>
+<!-- Star Badge Pill -->
+<div class="flex items-center gap-1 px-3 py-1 bg-white border-2 border-brandBorder rounded-xl shadow-sm" data-purpose="score-badge">
+<span class="text-amber-400 text-sm">⭐</span>
+<span class="font-extrabold text-sm text-brandNavy" id="star-count">1</span>
+</div>
+</div>
+<!-- Word Display with Missing Letter Slot -->
+<div class="my-4 sm:my-6 flex items-center justify-center gap-4 text-4xl sm:text-5xl font-black text-brandNavy tracking-widest font-comic select-none" data-purpose="word-display">
+<span class="transform transition hover:scale-110 inline-block">B</span>
+<span class="transform transition hover:scale-110 inline-block">O</span>
+<!-- Slot for target letter -->
+<span class="text-brandNavy inline-block min-w-[28px] border-b-4 border-brandNavy text-center font-black pb-0.5 leading-none transition-all" id="slot-letter">
+          _
+        </span>
+<span class="transform transition hover:scale-110 inline-block">A</span>
+</div>
+<!-- Listen Audio Button -->
+<button class="chunky-btn bg-brandYellow hover:bg-[#fed136] active:scale-95 px-5 py-2.5 flex items-center justify-center gap-2 mb-6 font-bold text-[15px] text-brandNavy transition" id="btn-audio" type="button">
+<span class="text-lg">🔊</span>
+<span>Dengarkan Kata</span>
+</button>
+<!-- Letter Options Grid: D, R, L -->
+<div class="w-full grid grid-cols-3 gap-3 sm:gap-4 mb-2" data-purpose="letter-options">
+<!-- Option: D -->
+<button class="letter-choice chunky-btn bg-white hover:bg-sky-50 h-28 sm:h-32 flex items-center justify-center text-4xl sm:text-5xl font-extrabold text-brandNavy" onclick="handleSelect('D', this)" type="button">
+          D
+        </button>
+<!-- Option: R -->
+<button class="letter-choice chunky-btn bg-white hover:bg-sky-50 h-28 sm:h-32 flex items-center justify-center text-4xl sm:text-5xl font-extrabold text-brandNavy" onclick="handleSelect('R', this)" type="button">
+          R
+        </button>
+<!-- Option: L (Correct Answer for B O L A) -->
+<button class="letter-choice chunky-btn bg-white hover:bg-sky-50 h-28 sm:h-32 flex items-center justify-center text-4xl sm:text-5xl font-extrabold text-brandNavy" onclick="handleSelect('L', this)" type="button">
+          L
+        </button>
+</div>
+<!-- Feedback Area -->
+<div class="h-8 flex items-center justify-center text-center font-extrabold text-sm sm:text-base mt-2" data-purpose="feedback-message" id="feedback-msg">
+<span class="text-slate-400 font-comic">Pilih huruf yang tepat untuk melengkapi kata!</span>
+</div>
+</section>
+<!-- END: InteractiveCard -->
+<!-- BEGIN: FooterNote -->
+<footer class="w-full text-center pb-6" data-purpose="footer-credit">
+<p class="text-xs sm:text-[13px] font-semibold text-slate-500 font-comic flex items-center justify-center gap-1.5">
+<span>Dibuat untuk membantu belajar membaca</span>
+<span class="text-amber-400">💛</span>
+</p>
+</footer>
+<!-- END: FooterNote -->
+</main>
+<!-- END: MobileDeviceContainer -->
+<!-- BEGIN: LogicScript -->
+<!-- Pure vanilla JavaScript handling audio synthesis & quiz interactions -->
+<script data-purpose="interactive-quiz-engine">
+    const correctAnswer = 'L';
+    let isCompleted = false;
+
+    // Pronounce Indonesian words using speech synthesis if available
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'id-ID';
+        utterance.rate = 0.85; // slower speech for children
+        utterance.pitch = 1.1; // friendly cheerful tone
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Audio button listener
+    document.getElementById('btn-audio').addEventListener('click', function() {
+      const slotLetter = document.getElementById('slot-letter').innerText;
+      if (slotLetter === '_' || slotLetter === '') {
+        speakText('BOLA');
+      } else {
+        speakText('B, O, ' + slotLetter + ', A. BOLA!');
+      }
+    });
+
+    // Handle user tapping one of the 3 letter choices
+    function handleSelect(selectedLetter, btnElement) {
+      const slot = document.getElementById('slot-letter');
+      const feedback = document.getElementById('feedback-msg');
+      const starCount = document.getElementById('star-count');
+      const allButtons = document.querySelectorAll('.letter-choice');
+
+      if (selectedLetter === correctAnswer) {
+        // Correct Choice
+        slot.innerText = selectedLetter;
+        slot.classList.remove('text-brandNavy', 'text-rose-500');
+        slot.classList.add('text-emerald-600', 'scale-110');
+
+        // Style the button as success
+        btnElement.classList.remove('bg-white', 'hover:bg-sky-50');
+        btnElement.classList.add('bg-emerald-500', 'text-white', 'border-[#065f46]');
+        
+        feedback.innerHTML = '<span class="text-emerald-600 flex items-center gap-1">🎉 Hebat! Kamu benar: B - O - L - A!</span>';
+        
+        if (!isCompleted) {
+          starCount.innerText = parseInt(starCount.innerText || 1) + 1;
+          isCompleted = true;
+        }
+
+        speakText('L! Hebat, BOLA!');
+      } else {
+        // Wrong Choice
+        slot.innerText = selectedLetter;
+        slot.classList.add('text-rose-500');
+        
+        btnElement.classList.add('shake-anim', 'bg-rose-100');
+        feedback.innerHTML = `<span class="text-rose-500">Coba lagi ya! Bukan BO${selectedLetter}A 💡</span>`;
+        
+        speakText('Bukan');
+
+        setTimeout(() => {
+          slot.innerText = '_';
+          slot.classList.remove('text-rose-500');
+          btnElement.classList.remove('shake-anim', 'bg-rose-100');
+        }, 900);
+      }
+    }
+  </script>
+<!-- END: LogicScript -->
+</body></html>

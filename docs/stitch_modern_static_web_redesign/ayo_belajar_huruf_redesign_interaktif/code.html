@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Ayo Belajar Huruf! - Belajar Membaca Seru</title>
+<!-- Tailwind CSS CDN with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Fredoka & Quicksand for playful child-friendly typography -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=Quicksand:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'cursive', 'sans-serif'],
+            quicksand: ['Quicksand', 'sans-serif']
+          },
+          colors: {
+            kidNavy: '#1e3a5f',
+            kidBlue: '#38bdf8',
+            kidYellow: '#facc15',
+            kidYellowHover: '#eab308',
+            kidGreen: '#4ade80',
+            kidCoral: '#fb7185',
+            kidOrange: '#fb923c'
+          },
+          boxShadow: {
+            'pop': '0 8px 0px #1e3a5f',
+            'pop-sm': '0 4px 0px #1e3a5f',
+            'pop-active': '0 0px 0px #1e3a5f',
+            'pop-coral': '0 8px 0px #c2410c',
+            'pop-green': '0 8px 0px #15803d'
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for Notebook Grid and 3D Buttons -->
+<style data-purpose="notebook-background">
+    body {
+      font-family: 'Fredoka', cursive, sans-serif;
+      background-color: #f8fafc;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.12) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+<style data-purpose="button-animations">
+    /* Tactile 3D Button Bounce Effects */
+    .btn-3d {
+      transition: all 0.12s ease-in-out;
+      transform: translateY(0);
+    }
+    .btn-3d:active {
+      transform: translateY(6px) !important;
+      box-shadow: 0 2px 0px #1e3a5f !important;
+    }
+    .pill-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .pill-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes starPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.4) rotate(15deg); }
+      100% { transform: scale(1); }
+    }
+    .animate-star {
+      animation: starPop 0.4s ease-in-out;
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+    .animate-wiggle {
+      animation: wiggle 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-kidNavy flex flex-col justify-between selection:bg-amber-200">
+<!-- BEGIN: MainHeader -->
+<header class="w-full pt-6 pb-3 px-4 text-center select-none" data-purpose="app-header">
+<div class="inline-block relative">
+<h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide text-kidNavy drop-shadow-sm flex items-center justify-center gap-2">
+<span>Ayo Belajar</span>
+<span class="relative inline-block text-kidNavy">
+          Huruf!
+          <span class="absolute -bottom-1 left-0 w-full h-3 bg-kidYellow -z-10 rounded-md transform -rotate-1 opacity-90"></span>
+</span>
+</h1>
+<span class="absolute -top-3 -right-6 text-2xl animate-bounce">🎈</span>
+</div>
+<p class="text-sm sm:text-base font-semibold text-slate-500 mt-2 font-quicksand">
+      Kenal huruf A sampai Z, terus belajar baca kata seru!
+    </p>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContentContainer -->
+<main class="w-full max-w-md mx-auto px-4 flex-1 flex flex-col pb-6" data-purpose="main-wrapper">
+<!-- BEGIN: NavigationTabs -->
+<!-- Tab Switcher Navigation with chunky rounded borders and 3D shadows -->
+<nav aria-label="Menu Utama" class="grid grid-cols-3 gap-2 sm:gap-3 my-4" data-purpose="tab-navigation">
+<button class="tab-button btn-3d font-bold py-2.5 px-2 rounded-2xl border-4 border-kidNavy bg-kidYellow text-kidNavy shadow-pop text-xs sm:text-sm md:text-base text-center leading-tight focus:outline-none" data-purpose="nav-tab-kenalan" id="tab-btn-kenalan" onclick="switchTab('kenalan')">
+        🔤 Kenalan Huruf
+      </button>
+<button class="tab-button btn-3d font-bold py-2.5 px-2 rounded-2xl border-4 border-kidNavy bg-white hover:bg-amber-50 text-kidNavy shadow-pop text-xs sm:text-sm md:text-base text-center leading-tight focus:outline-none" data-purpose="nav-tab-tebak" id="tab-btn-tebak" onclick="switchTab('tebak')">
+        🎯 Tebak Huruf
+      </button>
+<button class="tab-button btn-3d font-bold py-2.5 px-2 rounded-2xl border-4 border-kidNavy bg-white hover:bg-amber-50 text-kidNavy shadow-pop text-xs sm:text-sm md:text-base text-center leading-tight focus:outline-none" data-purpose="nav-tab-baca" id="tab-btn-baca" onclick="switchTab('baca')">
+        📖 Baca Kata
+      </button>
+</nav>
+<!-- END: NavigationTabs -->
+<!-- BEGIN: TabContent1_KenalanHuruf -->
+<!-- Mode Belajar Flashcard Huruf Interaktif -->
+<section class="tab-pane flex flex-col space-y-4" data-purpose="tab-pane-kenalan" id="tab-content-kenalan">
+<!-- Horizontal Letter Bar & Selector -->
+<div class="bg-white border-4 border-kidNavy rounded-2xl p-3 shadow-pop flex flex-col gap-2" data-purpose="letter-filter-card">
+<div class="flex items-center justify-between text-xs sm:text-sm font-bold font-quicksand text-slate-600 px-1">
+<span>Pilih Rentang Huruf:</span>
+<span class="text-xs bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full font-bold">A - Z</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<!-- Dropdown Awal -->
+<div class="flex-1 flex items-center bg-slate-100 border-2 border-kidNavy rounded-xl px-2 py-1">
+<span class="text-xs font-bold text-slate-500 mr-1">Dari:</span>
+<select class="w-full bg-transparent font-bold text-kidNavy border-0 p-0 text-sm focus:ring-0 cursor-pointer" id="select-start-char" onchange="updateAlphabetRange()">
+<!-- Options populated by JS -->
+</select>
+</div>
+<span class="font-bold text-slate-400 text-xs sm:text-sm">sampai</span>
+<!-- Dropdown Akhir -->
+<div class="flex-1 flex items-center bg-slate-100 border-2 border-kidNavy rounded-xl px-2 py-1">
+<span class="text-xs font-bold text-slate-500 mr-1">Ke:</span>
+<select class="w-full bg-transparent font-bold text-kidNavy border-0 p-0 text-sm focus:ring-0 cursor-pointer" id="select-end-char" onchange="updateAlphabetRange()">
+<!-- Options populated by JS -->
+</select>
+</div>
+</div>
+<!-- Quick Horizontal Letter Buttons -->
+<div class="pill-scroll flex overflow-x-auto gap-2 py-1 mt-1 border-t border-dashed border-slate-200 pt-2" data-purpose="alphabet-pill-slider" id="alphabet-scroll-bar">
+<!-- Letter pill items dynamically generated -->
+</div>
+</div>
+<!-- Main Flashcard Card -->
+<div class="bg-white border-4 border-kidNavy rounded-3xl p-6 shadow-pop text-center relative flex flex-col items-center justify-between min-h-[340px]" data-purpose="flashcard-display">
+<!-- Top Navigators Inside Card -->
+<div class="w-full flex items-center justify-between">
+<button class="btn-3d w-10 h-10 rounded-xl border-3 border-kidNavy bg-sky-100 flex items-center justify-center text-kidNavy font-bold text-lg shadow-pop-sm hover:bg-sky-200" onclick="navigateLetter(-1)" title="Huruf Sebelumnya">
+            ◀
+          </button>
+<span class="text-xs font-extrabold uppercase px-3 py-1 bg-amber-100 text-amber-900 rounded-full border border-amber-300" id="card-letter-indicator">
+            Huruf ke-11 dari 26
+          </span>
+<button class="btn-3d w-10 h-10 rounded-xl border-3 border-kidNavy bg-sky-100 flex items-center justify-center text-kidNavy font-bold text-lg shadow-pop-sm hover:bg-sky-200" onclick="navigateLetter(1)" title="Huruf Selanjutnya">
+            ▶
+          </button>
+</div>
+<!-- Giant Character -->
+<div class="my-3">
+<h2 class="text-8xl sm:text-9xl font-black text-kidNavy tracking-tight leading-none transition-transform duration-200" id="card-big-letter">
+            K
+          </h2>
+</div>
+<!-- Cute Mascot Illustration (3D Emoji & Word) -->
+<div class="flex flex-col items-center">
+<div class="text-6xl sm:text-7xl animate-wiggle select-none cursor-pointer filter drop-shadow-sm" id="card-mascot-emoji" onclick="speakCurrentCard()">
+            🐱
+          </div>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-kidNavy mt-1 capitalize" id="card-mascot-name">
+            Kucing
+          </h3>
+<p class="text-xs font-semibold text-slate-400 font-quicksand" id="card-mascot-phonetic">
+            /ku · cing/
+          </p>
+</div>
+<!-- Voice Pronounce Button -->
+<button class="btn-3d w-full max-w-xs mt-4 py-3 px-6 rounded-2xl border-4 border-kidNavy bg-kidYellow hover:bg-kidYellowHover font-extrabold text-kidNavy text-lg shadow-pop flex items-center justify-center gap-2 focus:outline-none" data-purpose="listen-audio-button" id="btn-speak-letter" onclick="speakCurrentCard()">
+<span class="text-2xl">🔊</span>
+<span>Dengarkan</span>
+</button>
+</div>
+</section>
+<!-- END: TabContent1_KenalanHuruf -->
+<!-- BEGIN: TabContent2_TebakHuruf -->
+<!-- Mode Kuis Tebak Huruf Interaktif -->
+<section class="tab-pane hidden flex flex-col space-y-4" data-purpose="tab-pane-tebak" id="tab-content-tebak">
+<!-- Quiz Game Board Container -->
+<div class="bg-white border-4 border-kidNavy rounded-3xl p-5 sm:p-6 shadow-pop text-center relative flex flex-col min-h-[380px]" data-purpose="quiz-container">
+<!-- Score and Round Header -->
+<div class="flex justify-between items-center mb-3">
+<div class="text-left">
+<span class="text-xs font-bold text-slate-500 uppercase">Tebak &amp; Menang</span>
+<div class="flex items-center gap-1 text-sm font-extrabold text-emerald-600">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+              Level <span id="quiz-round-number">1</span>
+</div>
+</div>
+<!-- Star Score Counter -->
+<div class="flex items-center gap-1.5 bg-amber-100 border-2 border-kidNavy px-3 py-1 rounded-2xl shadow-pop-sm font-extrabold text-kidNavy" id="quiz-star-badge">
+<span class="text-xl">⭐</span>
+<span class="text-base" id="quiz-score-val">0</span>
+</div>
+</div>
+<!-- Mascot Illustration Question -->
+<div class="my-auto py-2 flex flex-col items-center">
+<div class="text-6xl sm:text-7xl animate-bounce filter drop-shadow-md select-none" id="quiz-question-icon">
+            🦅
+          </div>
+<p class="text-base sm:text-lg font-bold text-slate-600 mt-2 font-quicksand">
+            Ini huruf awal dari <span class="font-extrabold text-kidNavy underline decoration-kidYellow decoration-4" id="quiz-question-word">Elang</span> apa ya?
+          </p>
+</div>
+<!-- 3 Interactive Chunky Answer Options -->
+<div class="grid grid-cols-3 gap-3 mt-4" data-purpose="quiz-choices" id="quiz-options-grid">
+<button class="quiz-btn btn-3d h-20 sm:h-24 rounded-2xl border-4 border-kidNavy bg-white text-kidNavy font-black text-3xl sm:text-4xl shadow-pop hover:bg-sky-50 flex items-center justify-center" onclick="handleQuizAnswer(0)">
+            E
+          </button>
+<button class="quiz-btn btn-3d h-20 sm:h-24 rounded-2xl border-4 border-kidNavy bg-white text-kidNavy font-black text-3xl sm:text-4xl shadow-pop hover:bg-sky-50 flex items-center justify-center" onclick="handleQuizAnswer(1)">
+            U
+          </button>
+<button class="quiz-btn btn-3d h-20 sm:h-24 rounded-2xl border-4 border-kidNavy bg-white text-kidNavy font-black text-3xl sm:text-4xl shadow-pop hover:bg-sky-50 flex items-center justify-center" onclick="handleQuizAnswer(2)">
+            L
+          </button>
+</div>
+<!-- Interactive Visual Feedback Banner (Hidden by default) -->
+<div class="hidden mt-3 p-2.5 rounded-xl border-2 font-bold text-sm transition-all duration-150" id="quiz-feedback-banner"></div>
+</div>
+<!-- Quick Reset / Next Button -->
+<div class="flex justify-center">
+<button class="btn-3d py-2 px-5 rounded-xl border-3 border-kidNavy bg-sky-200 hover:bg-sky-300 font-bold text-kidNavy text-sm shadow-pop-sm flex items-center gap-1.5" onclick="nextQuizQuestion()">
+<span>🔄 Soal Berikutnya</span>
+</button>
+</div>
+</section>
+<!-- END: TabContent2_TebakHuruf -->
+<!-- BEGIN: TabContent3_BacaKata -->
+<!-- Mode Belajar Membaca Suku Kata & Kata Utuh -->
+<section class="tab-pane hidden flex flex-col space-y-4" data-purpose="tab-pane-baca" id="tab-content-baca">
+<!-- Sub-Level Selector Buttons -->
+<div class="grid grid-cols-2 gap-2 sm:gap-3" data-purpose="baca-level-switch">
+<button class="baca-lvl-btn btn-3d py-2.5 px-3 rounded-2xl border-4 border-kidNavy bg-emerald-500 text-white shadow-pop font-bold text-xs sm:text-sm text-center" id="btn-level-1" onclick="switchBacaLevel(1)">
+          🌱 Level 1 - 2 Huruf
+        </button>
+<button class="baca-lvl-btn btn-3d py-2.5 px-3 rounded-2xl border-4 border-kidNavy bg-white text-kidNavy shadow-pop font-bold text-xs sm:text-sm text-center" id="btn-level-2" onclick="switchBacaLevel(2)">
+          🚀 Level 2 - 4 Huruf
+        </button>
+</div>
+<!-- Instruction Tip -->
+<div class="text-center font-quicksand text-xs font-semibold text-slate-500">
+        👆 Ketuk kartu suku kata untuk mendengar bunyinya!
+      </div>
+<!-- Words Card List Container -->
+<div class="flex flex-col space-y-3.5" data-purpose="baca-words-list" id="words-cards-container">
+<!-- Dynamically rendered based on active level -->
+</div>
+</section>
+<!-- END: TabContent3_BacaKata -->
+</main>
+<!-- END: MainContentContainer -->
+<!-- BEGIN: MainFooter -->
+<footer class="w-full py-4 text-center select-none font-quicksand border-t border-dashed border-sky-200 mt-4" data-purpose="app-footer">
+<p class="text-xs sm:text-sm font-bold text-slate-500 flex items-center justify-center gap-1.5">
+<span>Dibuat dengan cinta untuk belajar membaca</span>
+<span class="text-amber-500 animate-pulse">💛</span>
+</p>
+<p class="text-[11px] font-semibold text-slate-400 mt-0.5">
+      100% Client-side • Siap untuk GitHub Pages
+    </p>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: JavaScript Logic -->
+<!-- Comprehensive Data Store for Alphabet, Quiz & Syllables with Web Speech API -->
+<script data-purpose="app-database">
+    const ALPHABET_DATA = [
+      { char: 'A', name: 'Apel', emoji: '🍎', phonetic: '/a · pel/' },
+      { char: 'B', name: 'Bebek', emoji: '🦆', phonetic: '/be · bek/' },
+      { char: 'C', name: 'Ceri', emoji: '🍒', phonetic: '/ce · ri/' },
+      { char: 'D', name: 'Domba', emoji: '🐑', phonetic: '/dom · ba/' },
+      { char: 'E', name: 'Elang', emoji: '🦅', phonetic: '/e · lang/' },
+      { char: 'F', name: 'Flamingo', emoji: '🦩', phonetic: '/fla · ming · go/' },
+      { char: 'G', name: 'Gajah', emoji: '🐘', phonetic: '/ga · jah/' },
+      { char: 'H', name: 'Harimau', emoji: '🐯', phonetic: '/ha · ri · mau/' },
+      { char: 'I', name: 'Ikan', emoji: '🐟', phonetic: '/i · kan/' },
+      { char: 'J', name: 'Jeruk', emoji: '🍊', phonetic: '/je · ruk/' },
+      { char: 'K', name: 'Kucing', emoji: '🐱', phonetic: '/ku · cing/' },
+      { char: 'L', name: 'Lumba-lumba', emoji: '🐬', phonetic: '/lum · ba/' },
+      { char: 'M', name: 'Monyet', emoji: '🐵', phonetic: '/mo · nyet/' },
+      { char: 'N', name: 'Nanas', emoji: '🍍', phonetic: '/na · nas/' },
+      { char: 'O', name: 'Orangutan', emoji: '🦧', phonetic: '/o · rang · u · tan/' },
+      { char: 'P', name: 'Paus', emoji: '🐳', phonetic: '/pa · us/' },
+      { char: 'Q', name: 'Quran', emoji: '📖', phonetic: '/qur · an/' },
+      { char: 'R', name: 'Rusa', emoji: '🦌', phonetic: '/ru · sa/' },
+      { char: 'S', name: 'Sapi', emoji: '🐮', phonetic: '/sa · pi/' },
+      { char: 'T', name: 'Tupai', emoji: '🐿️', phonetic: '/tu · pai/' },
+      { char: 'U', name: 'Unta', emoji: '🐫', phonetic: '/un · ta/' },
+      { char: 'V', name: 'Vas Bunga', emoji: '🏺', phonetic: '/vas/' },
+      { char: 'W', name: 'Wortel', emoji: '🥕', phonetic: '/wor · tel/' },
+      { char: 'X', name: 'Xilofon', emoji: '🎼', phonetic: '/xi · lo · fon/' },
+      { char: 'Y', name: 'Yoyo', emoji: '🪀', phonetic: '/yo · yo/' },
+      { char: 'Z', name: 'Zebra', emoji: '🦓', phonetic: '/ze · bra/' }
+    ];
+
+    const LEVEL_1_WORDS = [
+      { syllable: 'BA', helper: 'BA', icon: '👶' },
+      { syllable: 'BO', helper: 'BO', icon: '⚽' },
+      { syllable: 'SA', helper: 'SA', icon: '🌿' },
+      { syllable: 'MA', helper: 'MA', icon: '🌸' },
+      { syllable: 'PA', helper: 'PA', icon: '🥪' },
+      { syllable: 'LI', helper: 'LI', icon: '🕯️' }
+    ];
+
+    const LEVEL_2_WORDS = [
+      { parts: ['BO', 'LA'], word: 'BOLA', icon: '⚽' },
+      { parts: ['BU', 'KU'], word: 'BUKU', icon: '📚' },
+      { parts: ['SA', 'PI'], word: 'SAPI', icon: '🐮' },
+      { parts: ['TO', 'PI'], word: 'TOPI', icon: '🧢' },
+      { parts: ['RO', 'TI'], word: 'ROTI', icon: '🍞' },
+      { parts: ['MA', 'TA'], word: 'MATA', icon: '👀' }
+    ];
+  </script>
+<!-- BEGIN: Interactive App Logic -->
+<script data-purpose="app-controller">
+    // App State
+    let currentIndex = 10; // Default starts at 'K' (matching the screenshot image_3)
+    let currentQuizIndex = 4; // 'E' for Elang
+    let quizScore = 0;
+    let currentBacaLevel = 1;
+
+    // Web Speech Synthesis Audio Synthesizer
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Cancel any ongoing sound
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'id-ID'; // Indonesian voice
+        utterance.rate = 0.85; // Slightly slower for clarity with kids
+        utterance.pitch = 1.2; // Cheerful friendly pitch
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Audio SFX using Web Audio API synthesized tones
+    function playBeep(type) {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (type === 'success') {
+          osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+          osc.frequency.exponentialRampToValueAtTime(783.99, ctx.currentTime + 0.15); // G5
+          gain.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.25);
+        } else if (type === 'try-again') {
+          osc.frequency.setValueAtTime(329.63, ctx.currentTime); // E4
+          osc.frequency.exponentialRampToValueAtTime(220.00, ctx.currentTime + 0.2); // A3
+          gain.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.25);
+        }
+      } catch (e) {
+        // Silent fallback
+      }
+    }
+
+    // Tab Switching Function
+    function switchTab(tabName) {
+      // Hide all panes
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      // Deselect all tabs
+      document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('bg-kidYellow');
+        btn.classList.add('bg-white');
+      });
+
+      // Show selected pane
+      const targetPane = document.getElementById(`tab-content-${tabName}`);
+      const targetBtn = document.getElementById(`tab-btn-${tabName}`);
+      if (targetPane && targetBtn) {
+        targetPane.classList.remove('hidden');
+        targetBtn.classList.remove('bg-white');
+        targetBtn.classList.add('bg-kidYellow');
+      }
+
+      // Initializer per tab
+      if (tabName === 'tebak') {
+        renderQuiz();
+      } else if (tabName === 'baca') {
+        renderBacaCards();
+      }
+    }
+
+    // -------------------------------------------------------------
+    // TAB 1: KENALAN HURUF LOGIC
+    // -------------------------------------------------------------
+    function initAlphabetSelectors() {
+      const startSelect = document.getElementById('select-start-char');
+      const endSelect = document.getElementById('select-end-char');
+      
+      startSelect.innerHTML = '';
+      endSelect.innerHTML = '';
+
+      ALPHABET_DATA.forEach((item, idx) => {
+        const optStart = new Option(item.char, idx);
+        const optEnd = new Option(item.char, idx);
+        startSelect.add(optStart);
+        endSelect.add(optEnd);
+      });
+
+      startSelect.value = 0; // 'A'
+      endSelect.value = 25;  // 'Z'
+
+      renderAlphabetPills();
+      updateFlashcard();
+    }
+
+    function updateAlphabetRange() {
+      renderAlphabetPills();
+    }
+
+    function renderAlphabetPills() {
+      const scrollBar = document.getElementById('alphabet-scroll-bar');
+      const startIdx = parseInt(document.getElementById('select-start-char').value) || 0;
+      const endIdx = parseInt(document.getElementById('select-end-char').value) || 25;
+      
+      const min = Math.min(startIdx, endIdx);
+      const max = Math.max(startIdx, endIdx);
+
+      scrollBar.innerHTML = '';
+
+      for (let i = min; i <= max; i++) {
+        const item = ALPHABET_DATA[i];
+        const pill = document.createElement('button');
+        const isActive = i === currentIndex;
+        pill.className = `btn-3d flex-shrink-0 w-9 h-9 rounded-xl font-black text-sm border-2 border-kidNavy flex items-center justify-center transition-all ${
+          isActive 
+            ? 'bg-kidYellow text-kidNavy shadow-pop-sm scale-105' 
+            : 'bg-white text-slate-700 hover:bg-sky-50 shadow-sm'
+        }`;
+        pill.innerText = item.char;
+        pill.onclick = () => {
+          currentIndex = i;
+          updateFlashcard();
+          renderAlphabetPills();
+        };
+        scrollBar.appendChild(pill);
+      }
+    }
+
+    function updateFlashcard() {
+      const current = ALPHABET_DATA[currentIndex];
+      const letterEl = document.getElementById('card-big-letter');
+      const emojiEl = document.getElementById('card-mascot-emoji');
+      const nameEl = document.getElementById('card-mascot-name');
+      const phoneticEl = document.getElementById('card-mascot-phonetic');
+      const indicatorEl = document.getElementById('card-letter-indicator');
+
+      // Pop animation on change
+      letterEl.classList.add('scale-90');
+      setTimeout(() => letterEl.classList.remove('scale-90'), 150);
+
+      letterEl.textContent = current.char;
+      emojiEl.textContent = current.emoji;
+      nameEl.textContent = current.name;
+      phoneticEl.textContent = current.phonetic;
+      indicatorEl.textContent = `Huruf ke-${currentIndex + 1} dari 26`;
+
+      renderAlphabetPills();
+    }
+
+    function navigateLetter(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = ALPHABET_DATA.length - 1;
+      if (currentIndex >= ALPHABET_DATA.length) currentIndex = 0;
+      updateFlashcard();
+      speakCurrentCard();
+    }
+
+    function speakCurrentCard() {
+      const current = ALPHABET_DATA[currentIndex];
+      // Speaks letter then the mascot name: e.g., "K, Kucing"
+      speakText(`${current.char}... ${current.name}`);
+    }
+
+    // -------------------------------------------------------------
+    // TAB 2: TEBAK HURUF (QUIZ) LOGIC
+    // -------------------------------------------------------------
+    let currentQuizCorrectChar = 'E';
+
+    function renderQuiz() {
+      const questionData = ALPHABET_DATA[currentQuizIndex];
+      currentQuizCorrectChar = questionData.char;
+
+      document.getElementById('quiz-question-icon').textContent = questionData.emoji;
+      document.getElementById('quiz-question-word').textContent = questionData.name;
+      
+      const banner = document.getElementById('quiz-feedback-banner');
+      banner.className = 'hidden';
+      banner.textContent = '';
+
+      // Generate 3 choices (1 correct, 2 random distractors)
+      let choices = [questionData.char];
+      while (choices.length < 3) {
+        const randItem = ALPHABET_DATA[Math.floor(Math.random() * ALPHABET_DATA.length)].char;
+        if (!choices.includes(randItem)) {
+          choices.push(randItem);
+        }
+      }
+      // Shuffle choices array
+      choices.sort(() => Math.random() - 0.5);
+
+      const optionsGrid = document.getElementById('quiz-options-grid');
+      optionsGrid.innerHTML = '';
+
+      choices.forEach(charChoice => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-btn btn-3d h-20 sm:h-24 rounded-2xl border-4 border-kidNavy bg-white text-kidNavy font-black text-3xl sm:text-4xl shadow-pop hover:bg-sky-50 flex items-center justify-center';
+        btn.textContent = charChoice;
+        btn.onclick = () => verifyAnswer(btn, charChoice);
+        optionsGrid.appendChild(btn);
+      });
+    }
+
+    function verifyAnswer(buttonElement, chosenChar) {
+      const banner = document.getElementById('quiz-feedback-banner');
+      const starBadge = document.getElementById('quiz-star-badge');
+      const scoreVal = document.getElementById('quiz-score-val');
+
+      // Disable buttons briefly
+      const allBtns = document.querySelectorAll('.quiz-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (chosenChar === currentQuizCorrectChar) {
+        // Correct Answer
+        buttonElement.classList.remove('bg-white');
+        buttonElement.classList.add('bg-kidGreen', 'text-white');
+        quizScore += 1;
+        scoreVal.textContent = quizScore;
+        starBadge.classList.add('animate-star');
+        setTimeout(() => starBadge.classList.remove('animate-star'), 500);
+
+        playBeep('success');
+        speakText(`Hebat! Benar, huruf ${chosenChar}`);
+
+        banner.className = 'mt-3 p-2.5 rounded-xl border-2 border-emerald-500 bg-emerald-100 text-emerald-800 font-bold text-sm block';
+        banner.innerHTML = `🎉 Pintar sekali! <b>${chosenChar}</b> untuk <b>${ALPHABET_DATA[currentQuizIndex].name}</b>!`;
+
+        setTimeout(() => {
+          nextQuizQuestion();
+        }, 1600);
+      } else {
+        // Wrong Answer
+        buttonElement.classList.remove('bg-white');
+        buttonElement.classList.add('bg-kidCoral', 'text-white');
+        playBeep('try-again');
+        speakText(`Ayo coba lagi`);
+
+        banner.className = 'mt-3 p-2.5 rounded-xl border-2 border-rose-400 bg-rose-100 text-rose-800 font-bold text-sm block';
+        banner.innerHTML = `Yuk coba lagi! Cari huruf depannya ya! 😊`;
+
+        setTimeout(() => {
+          allBtns.forEach(b => {
+            b.disabled = false;
+            b.classList.remove('bg-kidCoral', 'text-white');
+            b.classList.add('bg-white', 'text-kidNavy');
+          });
+        }, 1000);
+      }
+    }
+
+    function nextQuizQuestion() {
+      // Pick next question index different from current
+      let nextIdx = Math.floor(Math.random() * ALPHABET_DATA.length);
+      while (nextIdx === currentQuizIndex) {
+        nextIdx = Math.floor(Math.random() * ALPHABET_DATA.length);
+      }
+      currentQuizIndex = nextIdx;
+      
+      const roundNumEl = document.getElementById('quiz-round-number');
+      roundNumEl.textContent = parseInt(roundNumEl.textContent) + 1;
+      
+      renderQuiz();
+    }
+
+    // -------------------------------------------------------------
+    // TAB 3: BACA KATA LOGIC
+    // -------------------------------------------------------------
+    function switchBacaLevel(level) {
+      currentBacaLevel = level;
+      const btn1 = document.getElementById('btn-level-1');
+      const btn2 = document.getElementById('btn-level-2');
+
+      if (level === 1) {
+        btn1.className = 'baca-lvl-btn btn-3d py-2.5 px-3 rounded-2xl border-4 border-kidNavy bg-emerald-500 text-white shadow-pop font-bold text-xs sm:text-sm text-center';
+        btn2.className = 'baca-lvl-btn btn-3d py-2.5 px-3 rounded-2xl border-4 border-kidNavy bg-white text-kidNavy shadow-pop font-bold text-xs sm:text-sm text-center';
+      } else {
+        btn1.className = 'baca-lvl-btn btn-3d py-2.5 px-3 rounded-2xl border-4 border-kidNavy bg-white text-kidNavy shadow-pop font-bold text-xs sm:text-sm text-center';
+        btn2.className = 'baca-lvl-btn btn-3d py-2.5 px-3 rounded-2xl border-4 border-kidNavy bg-emerald-500 text-white shadow-pop font-bold text-xs sm:text-sm text-center';
+      }
+      renderBacaCards();
+    }
+
+    function renderBacaCards() {
+      const container = document.getElementById('words-cards-container');
+      container.innerHTML = '';
+
+      if (currentBacaLevel === 1) {
+        // Level 1: 2-Letter Syllables (BA, BO, SA, MA...) matching screenshot image_1
+        LEVEL_1_WORDS.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'bg-white border-4 border-kidNavy rounded-2xl p-4 shadow-pop flex flex-col items-center justify-center group cursor-pointer hover:bg-amber-50 transition-colors';
+          card.onclick = () => speakText(item.syllable);
+
+          card.innerHTML = `
+            <div class="inline-flex items-center justify-center px-6 py-2 rounded-2xl border-3 border-orange-500 bg-orange-100 shadow-[0_4px_0_#f97316] mb-2 group-hover:scale-105 transition-transform">
+              <span class="text-3xl sm:text-4xl font-black text-kidNavy tracking-wide">${item.syllable}</span>
+            </div>
+            <span class="text-sm font-extrabold text-slate-500 tracking-wider flex items-center gap-1.5 font-quicksand">
+              <span>${item.icon}</span> ${item.helper}
+            </span>
+          `;
+          container.appendChild(card);
+        });
+      } else {
+        // Level 2: 4-Letter Compound Words (BO-LA, BU-KU...)
+        LEVEL_2_WORDS.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'bg-white border-4 border-kidNavy rounded-2xl p-4 shadow-pop flex flex-col items-center justify-center group';
+
+          // Word card header with split interactive syllable buttons
+          const syllablesHtml = item.parts.map(part => `
+            <button onclick="event.stopPropagation(); speakText('${part}')" class="btn-3d px-4 py-1.5 rounded-xl border-3 border-kidNavy bg-amber-200 hover:bg-amber-300 text-kidNavy font-black text-2xl sm:text-3xl shadow-pop-sm active:translate-y-1">
+              ${part}
+            </button>
+          `).join('<span class="text-xl font-bold text-slate-400 mx-1">+</span>');
+
+          card.innerHTML = `
+            <div class="flex items-center justify-center gap-1 mb-2">
+              ${syllablesHtml}
+            </div>
+            <button onclick="speakText('${item.word}')" class="btn-3d mt-1 px-4 py-1 rounded-full border-2 border-kidNavy bg-sky-100 hover:bg-sky-200 text-xs sm:text-sm font-extrabold text-kidNavy flex items-center gap-1.5 shadow-sm">
+              <span>🔊 Eja Lengkap:</span>
+              <span class="underline decoration-2 text-sky-900">${item.word} ${item.icon}</span>
+            </button>
+          `;
+          container.appendChild(card);
+        });
+      }
+    }
+
+    // Initialize application on window load
+    window.addEventListener('DOMContentLoaded', () => {
+      initAlphabetSelectors();
+      renderQuiz();
+    });
+  </script>
+<!-- END: JavaScript Logic -->
+</body></html>

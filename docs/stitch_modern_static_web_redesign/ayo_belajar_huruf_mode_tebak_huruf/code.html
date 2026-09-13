@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="id" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Ayo Belajar Huruf! - Mode Tebak Huruf</title>
+<!-- Google Fonts: Fredoka & Nunito for vibrant, rounded kid-friendly look -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=Nunito:wght@700;800;900&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN with forms and container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'system-ui', 'sans-serif'],
+            nunito: ['Nunito', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              DEFAULT: '#1c3150',
+              900: '#142338',
+              800: '#1e293b',
+              700: '#23395d',
+            },
+            sunny: {
+              300: '#ffe066',
+              400: '#ffd13b',
+              DEFAULT: '#ffc93c',
+              500: '#f59e0b',
+            }
+          },
+          boxShadow: {
+            'brutal-sm': '0px 3px 0px #1c3150',
+            'brutal': '0px 5px 0px #1c3150',
+            'brutal-lg': '0px 7px 0px #1c3150',
+            'brutal-card': '0px 8px 0px #1c3150',
+            'brutal-pressed': '0px 1px 0px #1c3150',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="grid-notebook-background">
+    /* Subtle blue lined notebook grid background */
+    body {
+      background-color: #f7fbfe;
+      background-image: 
+        linear-gradient(to right, rgba(200, 230, 250, 0.45) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(200, 230, 250, 0.45) 1px, transparent 1px);
+      background-size: 24px 24px;
+      font-family: 'Fredoka', cursive, system-ui, sans-serif;
+    }
+    
+    /* Touch optimization */
+    button, select {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+  </style>
+<style data-purpose="playful-interactions">
+    /* Chunky tactile push buttons */
+    .btn-chunky {
+      transition: all 0.12s ease-in-out;
+    }
+    .btn-chunky:active {
+      transform: translateY(4px);
+      box-shadow: 0px 1px 0px #1c3150 !important;
+    }
+
+    /* Bounce effect on mascot hover/tap */
+    @keyframes gentle-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-gentle {
+      animation: gentle-bounce 2.6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-navy flex flex-col items-center justify-between antialiased selection:bg-sunny selection:text-navy">
+<!-- BEGIN: MainContainer -->
+<main class="w-full max-w-[430px] px-4 py-5 flex flex-col items-center gap-4">
+<!-- BEGIN: HeaderSection -->
+<header class="text-center w-full pt-1 pb-1 relative" data-purpose="app-header">
+<!-- Floating decorative elements -->
+<div class="inline-block relative">
+<h1 class="text-[34px] sm:text-[38px] font-black tracking-tight text-navy inline-flex items-center justify-center gap-1.5 leading-tight">
+<span class="">Ayo Belajar</span>
+<span class="relative inline-block text-navy">
+<span class="relative z-10 px-1">Huruf!</span>
+<!-- Yellow marker highlighter backdrop -->
+<span class="absolute left-0 bottom-1 w-full h-[18px] bg-sunny-400 rounded-sm -z-0 transform -rotate-1"></span>
+</span>
+</h1>
+<!-- Cute Red Balloon Icon at top right -->
+<span aria-hidden="true" class="absolute -top-3 -right-6 text-2xl select-none">🎈</span>
+</div>
+<p class="text-sm font-semibold text-slate-500 mt-1">
+        Kenal huruf A sampai Z, terus belajar baca kata seru!
+      </p>
+</header>
+<!-- END: HeaderSection -->
+<!-- BEGIN: NavigationTabs -->
+<!-- 3 Chunky playful tabs with active "Tebak Huruf" state -->
+<nav aria-label="Menu Utama" class="w-full grid grid-cols-3 gap-2.5" data-purpose="mode-navigation">
+<!-- Tab 1: Kenalan Huruf (Default) -->
+<button class="btn-chunky bg-white border-[2.5px] border-navy rounded-2xl py-2 px-1 text-center shadow-brutal-sm hover:bg-sky-50 flex flex-col sm:flex-row items-center justify-center gap-1" type="button">
+<span class="text-lg">🔤</span>
+<span class="text-xs font-bold text-navy tracking-tight leading-tight">Kenalan Huruf</span>
+</button>
+<!-- Tab 2: Tebak Huruf (ACTIVE) -->
+<button aria-current="page" class="btn-chunky bg-sunny border-[2.5px] border-navy rounded-2xl py-2 px-1 text-center shadow-brutal flex flex-col sm:flex-row items-center justify-center gap-1 relative overflow-hidden" type="button">
+<span class="text-lg">🎯</span>
+<span class="text-xs font-black text-navy tracking-tight leading-tight">Tebak Huruf</span>
+</button>
+<!-- Tab 3: Baca Kata (Default) -->
+<button class="btn-chunky bg-white border-[2.5px] border-navy rounded-2xl py-2 px-1 text-center shadow-brutal-sm hover:bg-sky-50 flex flex-col sm:flex-row items-center justify-center gap-1" type="button">
+<span class="text-lg">📖</span>
+<span class="text-xs font-bold text-navy tracking-tight leading-tight">Baca Kata</span>
+</button>
+</nav>
+<!-- END: NavigationTabs -->
+<!-- BEGIN: RangeSelectorCard -->
+<!-- Alphabet Range Filter & Quick Selector -->
+<section class="w-full bg-white border-[2.5px] border-navy rounded-2xl p-3 shadow-brutal flex flex-col gap-2.5" data-purpose="filter-range-panel">
+<!-- Top Row: Label & Range Badge -->
+<div class="flex items-center justify-between px-1">
+<span class="text-xs font-black text-navy tracking-tight uppercase">Pilih Rentang Huruf:</span>
+<span class="text-[11px] font-black bg-sky-100 text-sky-800 border border-sky-300 rounded-full px-2.5 py-0.5">A - Z</span>
+</div>
+<!-- Middle Row: Styled Dropdowns -->
+<div class="flex items-center justify-between gap-2">
+<!-- Dari selector -->
+<div class="flex-1 relative">
+<label class="sr-only" for="filter-dari">Dari huruf</label>
+<div class="flex items-center justify-between bg-white border-[2px] border-navy rounded-xl px-2.5 py-1.5 font-black text-xs text-navy shadow-sm">
+<span class="text-slate-500 font-bold">Dari:</span>
+<select class="border-0 bg-transparent text-navy font-black text-xs p-0 pl-1 focus:ring-0 cursor-pointer" id="filter-dari">
+<option selected="" value="A">A</option>
+<option value="B">B</option>
+<option value="C">C</option>
+</select>
+<span class="text-[10px] text-navy ml-1">▼</span>
+</div>
+</div>
+<span class="text-xs font-bold text-slate-400">sampai</span>
+<!-- Ke selector -->
+<div class="flex-1 relative">
+<label class="sr-only" for="filter-ke">Sampai huruf</label>
+<div class="flex items-center justify-between bg-white border-[2px] border-navy rounded-xl px-2.5 py-1.5 font-black text-xs text-navy shadow-sm">
+<span class="text-slate-500 font-bold">Ke:</span>
+<select class="border-0 bg-transparent text-navy font-black text-xs p-0 pl-1 focus:ring-0 cursor-pointer" id="filter-ke">
+<option selected="" value="Z">Z</option>
+<option value="Y">Y</option>
+<option value="X">X</option>
+</select>
+<span class="text-[10px] text-navy ml-1">▼</span>
+</div>
+</div>
+</div>
+<!-- Alphabet Quick Pills Row (Scrollable horizontally) -->
+<div class="flex items-center gap-1.5 overflow-x-auto pt-1 pb-1 scrollbar-none border-t border-dashed border-sky-100">
+
+
+
+
+
+
+
+
+</div>
+</section>
+<!-- END: RangeSelectorCard -->
+<!-- BEGIN: QuizMainPlayArea -->
+<!-- Interactive Quiz Card Container -->
+<section class="w-full bg-white border-[3px] border-navy rounded-3xl p-5 shadow-brutal-card relative flex flex-col items-center text-center" data-purpose="interactive-quiz-card">
+<!-- Top Info Row: Progress bar & Star Score Counter -->
+<div class="w-full flex items-center justify-between mb-3">
+<!-- Question count badge / mini progress -->
+<div class="flex items-center gap-1.5 bg-sky-50 border-2 border-navy/20 px-2.5 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="text-[11px] font-black text-navy uppercase tracking-wider">Soal 3 / 10</span>
+</div>
+<!-- Star Score Counter Pill -->
+<div class="flex items-center gap-1.5 bg-amber-50 border-[2.5px] border-navy px-3 py-1 rounded-full shadow-brutal-sm">
+<span class="text-sm">⭐</span>
+<span class="text-xs font-black text-navy font-nunito tracking-wide">12 Bintang</span>
+</div>
+</div>
+<!-- Mascot / Question Graphic Area -->
+<div class="my-2 flex flex-col items-center">
+<!-- Interactive Vector Graphic: Eagle / Elang Kartun -->
+<div class="w-28 h-28 relative flex items-center justify-center animate-gentle drop-shadow-sm cursor-pointer" title="Hewan Elang">
+<svg class="w-full h-full" fill="none" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg">
+<!-- Left Wing -->
+<path d="M72 65 C52 35 15 45 8 58 C3 66 18 84 48 80 C60 78 68 72 72 65 Z" fill="#A86256" stroke="#1c3150" stroke-linejoin="round" stroke-width="3"></path>
+<path d="M22 68 C35 72 50 72 60 67" stroke="#1c3150" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Body -->
+<path d="M65 48 C65 32 82 25 98 25 C116 25 125 38 122 58 C120 75 110 96 90 98 C72 100 65 82 65 48 Z" fill="#925044" stroke="#1c3150" stroke-width="3"></path>
+<!-- Right Wing -->
+<path d="M102 54 C120 40 148 42 154 52 C160 64 140 76 118 78 C108 79 104 74 102 54 Z" fill="#BA7366" stroke="#1c3150" stroke-linejoin="round" stroke-width="3"></path>
+<!-- Tail feathers -->
+<path d="M78 94 L66 112 C72 116 88 116 94 112 L86 94 Z" fill="#A86256" stroke="#1c3150" stroke-linejoin="round" stroke-width="3"></path>
+<!-- White eagle head hood -->
+<path d="M90 25 C75 25 70 36 70 48 C70 58 78 68 92 68 C104 68 114 62 115 48 C116 35 106 25 90 25 Z" fill="#F8FAFC" stroke="#1c3150" stroke-width="3"></path>
+<!-- Eagle Beak Yellow -->
+<path d="M70 45 C60 46 54 52 52 57 C58 63 68 62 72 58 Z" fill="#FFC93C" stroke="#1c3150" stroke-linejoin="round" stroke-width="3"></path>
+<!-- Cute Eye -->
+<ellipse cx="82" cy="45" fill="#1c3150" rx="4" ry="5"></ellipse>
+<circle cx="80.5" cy="43.5" fill="#FFFFFF" r="1.5"></circle>
+<!-- Cute blush -->
+<ellipse cx="88" cy="54" fill="#FCA5A5" opacity="0.8" rx="4" ry="2.5"></ellipse>
+<!-- Eagle Claw Feet -->
+<path d="M76 96 L72 104 M80 97 L80 106 M84 96 L88 104" stroke="#FFC93C" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+<!-- Question Prompt -->
+<h2 class="text-xl sm:text-2xl font-black text-navy mt-2 tracking-tight">
+          Ini huruf apa ya?
+        </h2>
+<!-- Hint Sound Button -->
+<button class="mt-2.5 inline-flex items-center gap-1.5 bg-sky-100 hover:bg-sky-200 border-[2px] border-navy text-navy font-bold text-xs px-3.5 py-1.5 rounded-full shadow-brutal-sm btn-chunky active:translate-y-1" type="button">
+<span class="">🔊</span>
+<span class="">Dengarkan Petunjuk</span>
+</button>
+<!-- Instruction Subtitle -->
+<p class="text-xs font-bold text-slate-400 mt-2">
+          Pilih huruf awal untuk gambar <span class="text-navy font-black">"Elang"</span>:
+        </p>
+</div>
+<!-- BEGIN: OptionCardsGrid -->
+<!-- 3 Chunky 3D Letter Cards (E - U - L) -->
+<div class="w-full grid grid-cols-3 gap-3.5 mt-3 mb-2" data-purpose="quiz-answer-options">
+<!-- Option 1: 'E' (Correct Answer Highlightable) -->
+<button class="btn-chunky group relative bg-amber-50 hover:bg-sunny active:bg-sunny-400 border-[3px] border-navy rounded-2xl h-28 sm:h-32 flex flex-col items-center justify-center shadow-brutal transition-transform" type="button">
+<span class="text-4xl sm:text-5xl font-black text-navy font-fredoka group-hover:scale-110 transition-transform">E</span>
+<span class="absolute bottom-2 text-[10px] font-black text-navy/60 uppercase">Elang</span>
+</button>
+<!-- Option 2: 'U' -->
+<button class="btn-chunky group relative bg-white hover:bg-sky-100 active:bg-sky-200 border-[3px] border-navy rounded-2xl h-28 sm:h-32 flex flex-col items-center justify-center shadow-brutal transition-transform" type="button">
+<span class="text-4xl sm:text-5xl font-black text-navy font-fredoka group-hover:scale-110 transition-transform">U</span>
+<span class="absolute bottom-2 text-[10px] font-black text-navy/40 uppercase">Udang</span>
+</button>
+<!-- Option 3: 'L' -->
+<button class="btn-chunky group relative bg-white hover:bg-sky-100 active:bg-sky-200 border-[3px] border-navy rounded-2xl h-28 sm:h-32 flex flex-col items-center justify-center shadow-brutal transition-transform" type="button">
+<span class="text-4xl sm:text-5xl font-black text-navy font-fredoka group-hover:scale-110 transition-transform">L</span>
+<span class="absolute bottom-2 text-[10px] font-black text-navy/40 uppercase">Lebah</span>
+</button>
+</div>
+<!-- END: OptionCardsGrid -->
+<!-- Encouragement Banner / Streak Indicator -->
+<div class="mt-3 w-full bg-emerald-50 border border-emerald-300 rounded-xl py-1.5 px-3 flex items-center justify-center gap-1.5">
+<span class="text-sm">🔥</span>
+<span class="text-[11px] font-bold text-emerald-800">Hebat! 2 jawaban berturut-turut benar!</span>
+</div>
+</section>
+<!-- END: QuizMainPlayArea -->
+<!-- BEGIN: Footer -->
+<footer class="text-center py-2 px-2 text-xs font-bold text-slate-500 space-y-1" data-purpose="app-footer">
+<p class="flex items-center justify-center gap-1 text-slate-600">
+<span class="">Dibuat dengan cinta untuk belajar membaca</span>
+<span class="text-sunny-500 text-sm">💛</span>
+</p>
+<p class="text-[11px] text-slate-400 font-medium">
+        100% Client-side • Siap untuk GitHub Pages
+      </p>
+</footer>
+<!-- END: Footer -->
+</main>
+<!-- END: MainContainer -->
+<!-- BEGIN: InteractiveScript -->
+<script data-purpose="quiz-audio-and-interactions">
+    // Add lightweight feedback interaction when clicking options
+    document.querySelectorAll('[data-purpose="quiz-answer-options"] button').forEach((button) => {
+      button.addEventListener('click', function () {
+        const letter = this.querySelector('.font-fredoka').innerText.trim();
+        
+        // If 'E' is clicked (correct answer)
+        if (letter === 'E') {
+          this.classList.remove('bg-amber-50');
+          this.classList.add('bg-emerald-400', 'text-white');
+          // Play celebration vibration if supported
+          if (navigator.vibrate) navigator.vibrate([40, 30, 40]);
+        } else {
+          // Shake animation feedback for wrong choices
+          this.classList.add('bg-rose-100');
+          setTimeout(() => {
+            this.classList.remove('bg-rose-100');
+          }, 400);
+        }
+      });
+    });
+  </script>
+<!-- END: InteractiveScript -->
+
+
+</body></html>

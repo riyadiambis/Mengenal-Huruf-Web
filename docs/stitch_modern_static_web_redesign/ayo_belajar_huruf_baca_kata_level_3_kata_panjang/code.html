@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Ayo Belajar Huruf! - Baca Kata Level 3</title>
+<!-- Tailwind CSS CDN with Forms and Container Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Fredoka & Nunito for playful educational UI -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'sans-serif'],
+            nunito: ['Nunito', 'sans-serif'],
+          },
+          colors: {
+            paper: '#fbfbf6',
+            navyTheme: '#1b3b6f',
+            navyBorder: '#142d54',
+            toyYellow: '#ffcb45',
+            toyYellowHover: '#f5c037',
+            toyTeal: '#179f8d',
+            toyTealHover: '#138777',
+            toyTealLight: '#e4f5ee',
+            toyBlue: '#3b82f6',
+            toyBlueHover: '#2563eb',
+            toyGreenText: '#10893e'
+          },
+          boxShadow: {
+            'chunky-sm': '0 3px 0 0 #142d54',
+            'chunky-md': '0 4px 0 0 #142d54',
+            'chunky-lg': '0 5px 0 0 #142d54',
+            'chunky-card': '4px 6px 0 0 #142d54',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Style for the math grid paper background -->
+<style data-purpose="background-pattern">
+    .grid-paper-bg {
+      background-color: #fbfcf8;
+      background-image: 
+        linear-gradient(to right, rgba(147, 197, 253, 0.35) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(147, 197, 253, 0.35) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
+<!-- Custom press interactive behaviors for chunky UI feel -->
+<style data-purpose="button-tactile">
+    .btn-chunky {
+      transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
+    }
+    .btn-chunky:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 0 #142d54 !important;
+    }
+  </style>
+</head>
+<body class="grid-paper-bg min-h-screen text-slate-800 font-fredoka flex flex-col items-center justify-between p-4 sm:p-6 antialiased select-none">
+<!-- BEGIN: MainContainer -->
+<main class="w-full max-w-[440px] flex flex-col items-center pt-2 pb-6 space-y-4">
+<!-- BEGIN: HeaderSection -->
+<header class="w-full text-center space-y-1.5" data-purpose="app-header">
+<!-- Title with yellow highlight -->
+<h1 class="text-3xl sm:text-[34px] font-black tracking-wide text-navyTheme inline-block relative leading-tight">
+        Ayo Belajar 
+        <span class="relative inline-block px-1">
+<span class="relative z-10">Huruf!</span>
+<!-- Highlight marker under text -->
+<span class="absolute bottom-1 left-0 right-0 h-3.5 bg-[#fde047] -z-0 rounded-sm"></span>
+</span>
+</h1>
+<!-- Subtitle description -->
+<p class="text-slate-500 font-nunito font-bold text-sm tracking-tight">
+        Kenal huruf A sampai Z, terus belajar baca kata
+      </p>
+</header>
+<!-- END: HeaderSection -->
+<!-- BEGIN: TopModeNavigation -->
+<!-- Primary navigation tabs: Kenalan Huruf, Tebak Huruf, Baca Kata -->
+<nav aria-label="Mode Pembelajaran" class="w-full grid grid-cols-3 gap-2 pt-2">
+<button class="btn-chunky bg-white text-navyTheme font-bold text-xs sm:text-sm py-2.5 px-1 rounded-2xl border-2 border-navyBorder shadow-chunky-sm text-center" type="button">
+        Kenalan Huruf
+      </button>
+<button class="btn-chunky bg-white text-navyTheme font-bold text-xs sm:text-sm py-2.5 px-1 rounded-2xl border-2 border-navyBorder shadow-chunky-sm text-center" type="button">
+        Tebak Huruf
+      </button>
+<!-- Active tab 'Baca Kata' in yellow -->
+<button class="btn-chunky bg-toyYellow text-navyTheme font-extrabold text-xs sm:text-sm py-2.5 px-1 rounded-2xl border-2 border-navyBorder shadow-chunky-sm text-center" type="button">
+        Baca Kata
+      </button>
+</nav>
+<!-- END: TopModeNavigation -->
+<!-- BEGIN: SubLevelNavigation -->
+<!-- Level selection tabs (Level 1, Level 2, Level 3) -->
+<section aria-label="Tingkat Kesulitan" class="w-full grid grid-cols-3 gap-2">
+<button class="btn-chunky bg-white text-navyTheme font-bold text-[11px] sm:text-xs py-2 px-1 rounded-2xl border-2 border-navyBorder shadow-chunky-sm flex items-center justify-center text-center leading-tight" type="button">
+        Level 1 - Suku Kata
+      </button>
+<button class="btn-chunky bg-white text-navyTheme font-bold text-[11px] sm:text-xs py-2 px-1 rounded-2xl border-2 border-navyBorder shadow-chunky-sm flex items-center justify-center text-center leading-tight" type="button">
+        Level 2 - Kata 4 Huruf
+      </button>
+<!-- Active Level 3 in dark teal with chunky shadow -->
+<button class="btn-chunky bg-toyTeal text-white font-bold text-[11px] sm:text-xs py-2 px-1 rounded-2xl border-2 border-navyBorder shadow-chunky-md flex items-center justify-center text-center leading-tight" type="button">
+        Level 3 - Kata Panjang
+      </button>
+</section>
+<!-- END: SubLevelNavigation -->
+<!-- BEGIN: InteractiveCardArea -->
+<!-- Main Quiz Card: Displays word, listening trigger, choices, and completion CTA -->
+<article class="w-full bg-white rounded-3xl border-[2.5px] border-navyBorder shadow-chunky-card p-5 sm:p-6 flex flex-col items-center relative mt-1" data-purpose="quiz-card">
+<!-- Top Card Row: Progress Tracker & Star Badge Counter -->
+<div class="w-full flex items-center justify-center relative mb-4">
+<!-- Progress Counter -->
+<span class="text-slate-600 font-nunito font-extrabold text-sm sm:text-base">
+          Kata 1 dari 5
+        </span>
+<!-- Star Points Counter badge -->
+<div class="absolute right-0 flex items-center gap-1.5 px-3 py-1 bg-white border-2 border-navyBorder rounded-full shadow-chunky-sm" data-purpose="score-badge">
+<span class="text-sm">⭐</span>
+<span class="text-navyTheme font-nunito font-black text-sm leading-none">1</span>
+</div>
+</div>
+<!-- Word Display with spaced letters -->
+<div class="my-4 py-1" data-purpose="target-word">
+<h2 class="text-3xl sm:text-4xl tracking-[0.42em] font-black text-navyTheme text-center uppercase pl-3">
+          KANCIL
+        </h2>
+</div>
+<!-- Listen Audio Button -->
+<button class="btn-chunky bg-toyYellow hover:bg-toyYellowHover text-navyTheme font-extrabold text-sm sm:text-base px-6 py-2.5 rounded-full border-2 border-navyBorder shadow-chunky-md flex items-center gap-2 mb-6" data-purpose="audio-button" onclick="speakWord('Kancil')" type="button">
+<span class="text-base">🔊</span>
+<span>Dengarkan Kata</span>
+</button>
+<!-- Letter Options Grid (3 choices) -->
+<section aria-label="Pilihan Huruf" class="w-full grid grid-cols-3 gap-3 sm:gap-4 mb-4">
+<!-- Option 1: Z -->
+<button class="btn-chunky h-24 sm:h-28 bg-white border-2 border-navyBorder rounded-2xl flex items-center justify-center shadow-chunky-md text-3xl sm:text-4xl font-black text-navyTheme hover:bg-slate-50" type="button">
+          Z
+        </button>
+<!-- Option 2: P -->
+<button class="btn-chunky h-24 sm:h-28 bg-white border-2 border-navyBorder rounded-2xl flex items-center justify-center shadow-chunky-md text-3xl sm:text-4xl font-black text-navyTheme hover:bg-slate-50" type="button">
+          P
+        </button>
+<!-- Option 3: N (Selected Correct Answer) -->
+<button class="btn-chunky h-24 sm:h-28 bg-toyTealLight border-2 border-toyTeal rounded-2xl flex items-center justify-center shadow-chunky-md text-3xl sm:text-4xl font-black text-toyTeal" type="button">
+          N
+        </button>
+</section>
+<!-- Positive Feedback / Validation Message -->
+<div class="text-center py-2 min-h-[36px] flex items-center justify-center" data-purpose="feedback-message">
+<p class="text-toyGreenText font-black text-base sm:text-lg tracking-wide">
+          Betul! KANCIL
+        </p>
+</div>
+<!-- Next Word Action Button -->
+<div class="w-full flex justify-center pt-2 pb-1">
+<button class="btn-chunky bg-toyBlue hover:bg-toyBlueHover text-white font-extrabold text-sm sm:text-base px-8 py-2.5 rounded-full border-2 border-navyBorder shadow-chunky-md" data-purpose="next-button" type="button">
+          Kata Berikutnya
+        </button>
+</div>
+</article>
+<!-- END: InteractiveCardArea -->
+</main>
+<!-- END: MainContainer -->
+<!-- BEGIN: PageFooter -->
+<footer class="w-full text-center pb-2" data-purpose="app-footer">
+<p class="text-slate-500 font-nunito font-bold text-xs flex items-center justify-center gap-1">
+      Dibuat untuk membantu belajar membaca <span class="text-xs">💛</span>
+</p>
+</footer>
+<!-- END: PageFooter -->
+<!-- BEGIN: AudioFeedbackScript -->
+<script data-purpose="speech-synthesis">
+    /**
+     * Pronounce the word using Web Speech API if supported
+     * @param {string} word - The word to be spoken in Indonesian
+     */
+    function speakWord(word) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'id-ID';
+        utterance.rate = 0.85; // Slightly slower for clear learning
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+  </script>
+<!-- END: AudioFeedbackScript -->
+</body></html>
