@@ -864,8 +864,10 @@
         <div class="mascot-area" style="margin-top: 0.25rem;">
           <div class="mascot-emoji animate-bounce-gentle" id="tebak-mascot-emoji">🦅</div>
           <p class="quiz-question-prompt">
-            Ini huruf awal dari <strong id="tebak-question-word">Elang</strong> apa ya?
+            Ini huruf awal dari benda ini apa ya?
           </p>
+          <!-- Nama benda HANYA disebutkan lewat TTS, tidak ditampilkan di layar -->
+          <p class="quiz-question-prompt" id="tebak-revealed-name" style="display: none; margin-top: -0.4rem;"></p>
           <button type="button" class="btn-3d" style="padding: 0.4rem 0.9rem; font-size: 0.8rem; border-radius: 9999px; gap: 0.35rem; background: var(--sky-light);" onclick="speakQuizHint()">
             <span>🔊</span>
             <span>Dengarkan Petunjuk</span>
@@ -1053,7 +1055,7 @@
       { word: 'PAKU', emoji: '🔨' },
       { word: 'RUSA', emoji: '🦌' },
       { word: 'SATU', emoji: '1️⃣' },
-      { word: 'DUA', emoji: '2️⃣' },
+      { word: 'DAGU', emoji: '🫠' },
       { word: 'LIMA', emoji: '5️⃣' },
       { word: 'GIGI', emoji: '🦷' },
       { word: 'KAKI', emoji: '🦶' },
@@ -1077,10 +1079,10 @@
       { word: 'PAYUNG', emoji: '☂️' },
       { word: 'LANGIT', emoji: '☁️' },
       { word: 'KERBAU', emoji: '🐃' },
-      { word: 'KAMBING', emoji: '🐐' },
+      { word: 'KUCING', emoji: '🐱' },
       { word: 'DOMBA', emoji: '🐑' },
       { word: 'GAJAH', emoji: '🐘' },
-      { word: 'HARIMAU', emoji: '🐯' },
+      { word: 'BEBEK', emoji: '🦆' },
       { word: 'WORTEL', emoji: '🥕' }
     ];
 
@@ -1347,6 +1349,15 @@
         rangeCandidates.push(ALPHABET_DATA[i]);
       }
 
+      // Hitung batas dinamis recentAnswers berdasarkan ukuran rentang.
+      // Pada rentang 5 huruf, hanya 2 huruf terakhir yang dilarang, bukan 4.
+      const maxRecent = Math.max(1, Math.floor(rangeCandidates.length / 2));
+
+      // Potong recentAnswers jika melebihi batas baru (misal rentang baru diperkecil)
+      while (tebakRecentAnswers.length > maxRecent) {
+        tebakRecentAnswers.shift();
+      }
+
       // 2. Filter kandidat yang TIDAK ada di recentAnswers
       let validCandidates = rangeCandidates.filter(item => !tebakRecentAnswers.includes(item.char));
 
@@ -1360,17 +1371,16 @@
       const chosenItem = validCandidates[Math.floor(Math.random() * validCandidates.length)];
       currentTebakItem = chosenItem;
 
-      // Update recentAnswers (FIFO, max 4)
+      // Update recentAnswers (FIFO, max = maxRecent)
       tebakRecentAnswers.push(chosenItem.char);
-      if (tebakRecentAnswers.length > 4) {
+      if (tebakRecentAnswers.length > maxRecent) {
         tebakRecentAnswers.shift();
       }
 
       // 3. Buat 2 pengecoh acak unik dari ALPHABET_DATA
-      let distractors = [];
       const otherLetters = ALPHABET_DATA.filter(it => it.char !== chosenItem.char);
       const shuffledOthers = shuffleArray(otherLetters);
-      distractors = [shuffledOthers[0].char, shuffledOthers[1].char];
+      const distractors = [shuffledOthers[0].char, shuffledOthers[1].char];
 
       // 4. Acak urutan 3 pilihan
       const choices = shuffleArray([chosenItem.char, distractors[0], distractors[1]]);
@@ -1378,7 +1388,11 @@
       // Render ke UI
       document.getElementById('tebak-soal-indicator').textContent = `Soal ${tebakQuestionCount}`;
       document.getElementById('tebak-mascot-emoji').textContent = chosenItem.emoji;
-      document.getElementById('tebak-question-word').textContent = chosenItem.name;
+
+      // Sembunyikan nama benda — hanya emoji yang terlihat, nama HANYA lewat TTS
+      const revealedName = document.getElementById('tebak-revealed-name');
+      revealedName.style.display = 'none';
+      revealedName.textContent = '';
 
       const banner = document.getElementById('tebak-feedback-banner');
       banner.className = 'feedback-banner';
@@ -1416,7 +1430,12 @@
 
         playBeep('success');
         triggerHaptic();
-        speak(`Hebat! Benar, huruf ${chosenChar}`);
+        speak(`Hebat! Benar, huruf ${chosenChar} untuk ${currentTebakItem.name}`);
+
+        // Setelah benar, BARU tampilkan nama benda di layar
+        const revealedName = document.getElementById('tebak-revealed-name');
+        revealedName.style.display = 'block';
+        revealedName.innerHTML = `<strong>${currentTebakItem.emoji} ${currentTebakItem.name}</strong>`;
 
         banner.className = 'feedback-banner success';
         banner.innerHTML = `🎉 Pintar sekali! <strong>${chosenChar}</strong> untuk <strong>${currentTebakItem.name}</strong>!`;
@@ -1432,7 +1451,7 @@
         speak('Ayo coba lagi');
 
         banner.className = 'feedback-banner try-again';
-        banner.innerHTML = `Yuk coba lagi! Cari huruf depan untuk <strong>${currentTebakItem.name}</strong> ya! 😊`;
+        banner.innerHTML = `Yuk coba lagi! Cari huruf depan dari benda ini ya! 😊`;
 
         setTimeout(() => {
           btn.classList.remove('wrong', 'shake-anim');
