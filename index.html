@@ -162,11 +162,26 @@
     }
 
     .sub-nav {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.4rem;
+      display: flex;
+      gap: 0.35rem;
       width: 100%;
       margin-bottom: 0.25rem;
+      overflow-x: auto;
+      padding: 0.1rem 0 0.35rem;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .sub-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (min-width: 400px) {
+      .sub-nav {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        overflow-x: visible;
+      }
     }
 
     /* ==========================================================================
@@ -204,11 +219,33 @@
     }
 
     .btn-sublevel {
-      padding: 0.5rem 0.25rem;
+      flex: 1 0 auto;
+      min-width: 64px;
+      padding: 0.45rem 0.2rem;
       font-size: 0.72rem;
       font-weight: 800;
       border-radius: 0.85rem;
-      min-height: 48px;
+      min-height: 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.12rem;
+      white-space: nowrap;
+    }
+
+    .btn-sublevel .lvl-title {
+      font-weight: 800;
+      font-size: 0.74rem;
+      line-height: 1.1;
+    }
+
+    .btn-sublevel .lvl-subtext {
+      display: block;
+      font-weight: 700;
+      font-size: 0.64rem;
+      opacity: 0.9;
+      line-height: 1.1;
     }
 
     .btn-sublevel.active {
@@ -690,6 +727,205 @@
     }
 
     /* ==========================================================================
+       SESSION LENGTH SELECTOR & RESULT SCREEN
+       ========================================================================== */
+    .session-len-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.55rem 0.85rem;
+      border-radius: 1.15rem;
+    }
+
+    .session-len-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--slate-600);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .session-pills {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .btn-session-pill {
+      font-family: inherit;
+      font-size: 0.76rem;
+      font-weight: 900;
+      padding: 0.22rem 0.65rem;
+      border-radius: 9999px;
+      border: 2px solid var(--navy);
+      background-color: var(--white);
+      color: var(--navy);
+      box-shadow: 0 2px 0 var(--navy);
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+
+    .btn-session-pill:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 var(--navy);
+    }
+
+    .btn-session-pill.active {
+      background-color: var(--yellow) !important;
+    }
+
+    .result-eval-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      background-color: var(--white);
+      border: 1.5px solid var(--orange);
+      color: var(--navy);
+      font-size: 0.82rem;
+      font-weight: 900;
+      border-radius: 0.5rem;
+      box-shadow: 0 1.5px 0 var(--navy);
+    }
+
+    /* ==========================================================================
+       LEVEL 2: SYLLABLE MISSING SLOT
+       ========================================================================== */
+    .syllable-slot-box {
+      background-color: var(--orange-light);
+      border: 3px solid var(--orange);
+      border-radius: 1.5rem;
+      padding: 1.25rem 2.25rem;
+      box-shadow: 0 6px 0 var(--orange);
+      margin: 0.5rem 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--navy);
+    }
+
+    /* ==========================================================================
+       LEVEL 5: SUSUN HURUF (SCRAMBLE)
+       ========================================================================== */
+    .scramble-slots-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.45rem;
+      margin: 0.6rem 0 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .scramble-slot {
+      width: 3.2rem;
+      height: 3.6rem;
+      border: 2.5px dashed var(--navy);
+      border-radius: 0.85rem;
+      background-color: var(--white);
+      color: var(--navy);
+      font-size: 2rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+      transition: transform 0.1s ease, background-color 0.15s ease, border-color 0.15s ease;
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+
+    .scramble-slot.filled {
+      border-style: solid;
+      background-color: var(--yellow-light);
+      box-shadow: 0 3px 0 var(--navy);
+    }
+
+    .scramble-slot.filled-correct {
+      background-color: var(--green-light) !important;
+      border-color: var(--green-dark) !important;
+      color: var(--green-dark) !important;
+      box-shadow: 0 3px 0 var(--green-dark) !important;
+    }
+
+    .scramble-slot.filled-wrong {
+      background-color: var(--coral-light) !important;
+      border-color: var(--coral-dark) !important;
+      color: var(--coral-dark) !important;
+      box-shadow: 0 3px 0 var(--coral-dark) !important;
+    }
+
+    .scramble-pool-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.45rem;
+      margin: 0.5rem 0 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-letter-scramble {
+      width: 3.2rem;
+      height: 3.6rem;
+      font-size: 1.8rem;
+      font-weight: 900;
+      border-radius: 0.85rem;
+      border: 2.5px solid var(--navy);
+      background-color: var(--white);
+      color: var(--navy);
+      box-shadow: 0 4px 0 var(--navy);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.09s ease, box-shadow 0.09s ease, opacity 0.15s ease;
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+
+    .btn-letter-scramble:active:not(:disabled) {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--navy);
+    }
+
+    .btn-letter-scramble:disabled {
+      opacity: 0.2;
+      cursor: not-allowed;
+      box-shadow: 0 1px 0 var(--navy);
+      transform: translateY(2px);
+    }
+
+    .scramble-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.35rem;
+    }
+
+    .btn-scramble-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: 2px solid var(--navy);
+      border-radius: 9999px;
+      padding: 0.35rem 0.85rem;
+      background-color: var(--sky-light);
+      color: var(--navy);
+      box-shadow: 0 2px 0 var(--navy);
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+
+    .btn-scramble-action:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 var(--navy);
+    }
+
+    /* ==========================================================================
        ANIMATIONS
        ========================================================================== */
     @keyframes floatBalloon {
@@ -911,20 +1147,44 @@
     </section>
 
     <!-- ========================================================================
-         TAB 3: BACA KATA (LEVEL 1, 2, 3)
+         TAB 3: BACA KATA (LEVEL 1, 2, 3, 4, 5)
          ======================================================================== -->
     <section id="pane-baca" class="tab-pane hidden" style="flex-direction: column; gap: 0.75rem;">
-      <!-- Sub-Level Tabs -->
+      <!-- Sub-Level Tabs (5 Levels) -->
       <div class="sub-nav" aria-label="Pilih Tingkat Level" data-purpose="level-navigation">
         <button type="button" class="btn-3d btn-sublevel active" id="btn-lvl-1" onclick="switchBacaLevel(1)">
-          🌱 Level 1<br><span style="font-weight: 600; font-size: 0.68rem;">Suku Kata</span>
+          <span class="lvl-title">🌱 Lvl 1</span>
+          <span class="lvl-subtext">Kenal Suku</span>
         </button>
         <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-2" onclick="switchBacaLevel(2)">
-          🚀 Level 2<br><span style="font-weight: 600; font-size: 0.68rem;">Kata 4 Huruf</span>
+          <span class="lvl-title">🧩 Lvl 2</span>
+          <span class="lvl-subtext">Lengkapi Suku</span>
         </button>
         <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-3" onclick="switchBacaLevel(3)">
-          🏆 Level 3<br><span style="font-weight: 600; font-size: 0.68rem;">Kata Panjang</span>
+          <span class="lvl-title">🚀 Lvl 3</span>
+          <span class="lvl-subtext">4 Huruf</span>
         </button>
+        <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-4" onclick="switchBacaLevel(4)">
+          <span class="lvl-title">🏆 Lvl 4</span>
+          <span class="lvl-subtext">Panjang</span>
+        </button>
+        <button type="button" class="btn-3d btn-sublevel" id="btn-lvl-5" onclick="switchBacaLevel(5)">
+          <span class="lvl-title">🧱 Lvl 5</span>
+          <span class="lvl-subtext">Susun Huruf</span>
+        </button>
+      </div>
+
+      <!-- Session Length Selector Card (Aturan H) -->
+      <div class="chunky-card session-len-card" id="baca-session-config" data-purpose="session-length-selector">
+        <div class="session-len-label">
+          <span>⏱️</span>
+          <span>Panjang Sesi:</span>
+        </div>
+        <div class="session-pills">
+          <button type="button" class="btn-session-pill active" id="btn-session-10" onclick="setSessionLength(10)">10 Soal</button>
+          <button type="button" class="btn-session-pill" id="btn-session-15" onclick="setSessionLength(15)">15 Soal</button>
+          <button type="button" class="btn-session-pill" id="btn-session-20" onclick="setSessionLength(20)">20 Soal</button>
+        </div>
       </div>
 
       <!-- SUB-PANE 1: Flashcard Suku Kata (Level 1) -->
@@ -932,7 +1192,10 @@
         <div id="lvl1-card-content" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 0.6rem;">
           <div class="card-top-nav">
             <button type="button" class="btn-3d btn-nav-arrow" onclick="navigateSyllable(-1)" title="Sebelumnya" aria-label="Sebelumnya">◀</button>
-            <span class="card-indicator" id="lvl1-card-indicator">Kartu 1 dari 30</span>
+            <span class="card-indicator" id="lvl1-card-indicator">Kartu 1 dari 10</span>
+            <button type="button" class="btn-reset-session" onclick="resetCurrentSession()" title="Mulai ulang sesi">
+              <span>🔄</span> Mulai Ulang
+            </button>
             <button type="button" class="btn-3d btn-nav-arrow" onclick="navigateSyllable(1)" title="Selanjutnya" aria-label="Selanjutnya">▶</button>
           </div>
 
@@ -941,10 +1204,10 @@
             <span class="syllable-text" id="lvl1-syllable-text">BA</span>
           </div>
 
-          <!-- Helper icon -->
-          <div class="syllable-hint">
+          <!-- Helper icon & example word (Bug 1 fixed: no duplicate syllable) -->
+          <div class="syllable-hint" id="lvl1-hint-container">
             <span id="lvl1-syllable-icon">👶</span>
-            <span id="lvl1-syllable-helper">BA</span>
+            <span id="lvl1-syllable-word" style="font-size: 1.15rem; font-weight: 900; color: var(--navy);">Bayi</span>
           </div>
 
           <!-- Listen Button -->
@@ -973,35 +1236,173 @@
         </div>
       </div>
 
-      <!-- SUB-PANE 2 & 3: Word Quiz (Level 2: 4-Letter, Level 3: Long Words) -->
-      <div id="subpane-lvl-word" class="chunky-card flashcard-inner hidden">
+      <!-- SUB-PANE 2, 3, 4: Missing Letter Quiz (Lvl 2: Suku Kata, Lvl 3: 4 Huruf, Lvl 4: Kata Panjang) -->
+      <div id="subpane-lvl-quiz" class="chunky-card flashcard-inner hidden">
         <div class="card-top-nav">
-          <span class="card-indicator" id="lvl-word-progress">Kata 1 dari 15</span>
-          <div class="star-score-badge" id="lvl-word-star-badge">
+          <span class="card-indicator" id="lvl-quiz-progress">Soal 1 dari 10</span>
+          <div class="star-score-badge" id="lvl-quiz-star-badge">
             <span style="color: #f59e0b;">⭐</span>
-            <span id="lvl-word-score-val">0</span>
+            <span id="lvl-quiz-score-val">0</span>
           </div>
+          <button type="button" class="btn-reset-session" onclick="resetCurrentSession()" title="Mulai ulang sesi">
+            <span>🔄</span> Mulai Ulang
+          </button>
         </div>
 
-        <!-- Word with Slot -->
-        <div class="word-slot-container" id="lvl-word-display"></div>
+        <!-- Mascot / Hint Area for Words -->
+        <div class="mascot-area" id="lvl-quiz-mascot-area" style="margin-top: 0.15rem;">
+          <div class="mascot-emoji animate-bounce-gentle" id="lvl-quiz-emoji" style="font-size: 3.8rem;">📚</div>
+        </div>
 
-        <!-- Listen Word Button -->
-        <button type="button" class="btn-3d btn-listen" onclick="speakCurrentWordQuestion()" style="margin: 0.25rem 0 0.5rem;">
+        <!-- Question Display (Slot) -->
+        <div class="word-slot-container" id="lvl-quiz-word-display"></div>
+
+        <!-- Syllable specific hint (for Lvl 2) -->
+        <div class="syllable-hint hidden" id="lvl-quiz-syllable-hint">
+          <span id="lvl-quiz-hint-icon">📚</span>
+          <span id="lvl-quiz-hint-word" style="font-weight: 900; color: var(--navy);">Buku</span>
+        </div>
+
+        <!-- Listen Button -->
+        <button type="button" class="btn-3d btn-listen" id="btn-lvl-quiz-listen" onclick="speakCurrentQuizQuestion()" style="margin: 0.25rem 0 0.5rem;">
           <span style="font-size: 1.3rem;">🔊</span>
-          <span>Dengarkan Kata</span>
+          <span id="lvl-quiz-listen-text">Dengarkan Kata</span>
         </button>
 
-        <!-- 3 Letter Choice Buttons -->
-        <div class="quiz-options-grid" id="lvl-word-options-grid"></div>
+        <!-- 3 Letter Choice Buttons (Rules G & F) -->
+        <div class="quiz-options-grid" id="lvl-quiz-options-grid"></div>
 
         <!-- Feedback & Next Button Area -->
-        <div class="feedback-banner" id="lvl-word-feedback-banner"></div>
+        <div class="feedback-banner" id="lvl-quiz-feedback-banner"></div>
 
-        <button type="button" class="btn-3d btn-next hidden" id="btn-lvl-word-next" onclick="nextWordQuizQuestion()">
-          <span>Kata Berikutnya</span>
+        <button type="button" class="btn-3d btn-next hidden" id="btn-lvl-quiz-next" onclick="advanceQuizQuestion()">
+          <span>Soal Berikutnya</span>
           <span>▶</span>
         </button>
+      </div>
+
+      <!-- SUB-PANE 5: Susun Huruf (Level 5) -->
+      <div id="subpane-lvl-5" class="chunky-card flashcard-inner hidden">
+        <div class="card-top-nav">
+          <span class="card-indicator" id="lvl5-progress">Soal 1 dari 10</span>
+          <div class="star-score-badge" id="lvl5-star-badge">
+            <span style="color: #f59e0b;">⭐</span>
+            <span id="lvl5-score-val">0</span>
+          </div>
+          <button type="button" class="btn-reset-session" onclick="resetCurrentSession()" title="Mulai ulang sesi">
+            <span>🔄</span> Mulai Ulang
+          </button>
+        </div>
+
+        <!-- Mascot / Emoji -->
+        <div class="mascot-area" style="margin-top: 0.15rem;">
+          <div class="mascot-emoji animate-wiggle" id="lvl5-mascot-emoji" style="font-size: 4rem;">⚽</div>
+          <p class="quiz-question-prompt" style="margin: 0.2rem 0 0.4rem;">
+            Susun huruf menjadi kata yang benar!
+          </p>
+          <button type="button" class="btn-3d" style="padding: 0.4rem 0.9rem; font-size: 0.82rem; border-radius: 9999px; gap: 0.35rem; background: var(--sky-light);" onclick="speakCurrentScrambleWord()">
+            <span>🔊</span>
+            <span>Dengarkan Kata</span>
+          </button>
+        </div>
+
+        <!-- Slots Container -->
+        <div class="scramble-slots-row" id="lvl5-slots-container"></div>
+
+        <!-- Letter Buttons Pool -->
+        <div class="scramble-pool-row" id="lvl5-pool-container"></div>
+
+        <!-- Action Buttons (Undo & Reset Slots) -->
+        <div class="scramble-actions-row">
+          <button type="button" class="btn-scramble-action" onclick="undoLastScrambleLetter()">
+            <span>⌫</span>
+            <span>Hapus</span>
+          </button>
+          <button type="button" class="btn-scramble-action" onclick="resetScrambleSlots()">
+            <span>🔄</span>
+            <span>Susun Ulang</span>
+          </button>
+        </div>
+
+        <!-- Feedback Banner -->
+        <div class="feedback-banner" id="lvl5-feedback-banner"></div>
+      </div>
+
+      <!-- SUB-PANE RESULT: Layar Hasil Sesi (Aturan I & Klarifikasi 2) -->
+      <div id="subpane-baca-result" class="chunky-card flashcard-inner hidden" data-purpose="session-result-pane">
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; padding: 0.5rem 0;">
+          <!-- Celebration Icon -->
+          <div style="font-size: 3.8rem; line-height: 1;" id="result-icon">🎉</div>
+          
+          <!-- Title & Subtitle -->
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--navy);" id="result-title">Sesi Selesai! Hebat!</h2>
+            <p style="font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--slate-500); margin-top: 0.2rem;" id="result-subtitle">
+              Kamu sudah menyelesaikan latihan hari ini!
+            </p>
+          </div>
+
+          <!-- Stats Box for Levels 2-5 (Scored) -->
+          <div id="result-stats-scored" style="width: 100%; display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="display: flex; gap: 0.6rem; width: 100%;">
+              <div style="flex: 1; background-color: var(--green-light); border: 2px solid var(--green); border-radius: 1rem; padding: 0.65rem 0.5rem; text-align: center;">
+                <div style="font-size: 0.72rem; font-weight: 900; color: var(--green-dark); text-transform: uppercase;">Benar</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: var(--navy); margin-top: 0.15rem;" id="result-score-ratio">10 / 10</div>
+              </div>
+              <div style="flex: 1; background-color: #fef3c7; border: 2px solid #f59e0b; border-radius: 1rem; padding: 0.65rem 0.5rem; text-align: center;">
+                <div style="font-size: 0.72rem; font-weight: 900; color: #92400e; text-transform: uppercase;">Total Bintang</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: var(--navy); margin-top: 0.15rem;" id="result-stars">⭐ 10</div>
+              </div>
+            </div>
+
+            <!-- Evaluation / Wrong Answers (Aturan I) -->
+            <div id="result-wrong-box" style="background-color: var(--orange-light); border: 2px solid var(--orange); border-radius: 1rem; padding: 0.75rem; text-align: left; display: none;">
+              <div style="font-size: 0.78rem; font-weight: 900; color: #c2410c; display: flex; align-items: center; gap: 0.35rem; margin-bottom: 0.4rem;">
+                <span>📝</span>
+                <span>Perlu Diulang Besok:</span>
+              </div>
+              <div id="result-wrong-list" style="display: flex; flex-wrap: wrap; gap: 0.35rem;"></div>
+              <p style="font-family: 'Nunito', sans-serif; font-size: 0.76rem; font-weight: 700; color: #9a3412; margin-top: 0.4rem;">
+                Tidak apa-apa, besok kita coba lagi ya! Latihan terus bikin makin jago! 💪
+              </p>
+            </div>
+
+            <div id="result-perfect-box" style="background-color: var(--teal-light); border: 2px solid var(--teal); border-radius: 1rem; padding: 0.75rem; text-align: center; display: none;">
+              <p style="font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 800; color: var(--teal-dark);">
+                🌟 Luar biasa! Semua soal dijawab benar dengan sempurna!
+              </p>
+            </div>
+          </div>
+
+          <!-- Stats Box for Level 1 (Klarifikasi 2: Tanpa Skor/Bintang) -->
+          <div id="result-stats-lvl1" style="width: 100%; display: flex; flex-direction: column; gap: 0.6rem; display: none;">
+            <div style="display: flex; gap: 0.6rem; width: 100%;">
+              <div style="flex: 1; background-color: var(--sky-light); border: 2px solid #0284c7; border-radius: 1rem; padding: 0.65rem 0.5rem; text-align: center;">
+                <div style="font-size: 0.72rem; font-weight: 900; color: #0369a1; text-transform: uppercase;">Kartu Dilihat</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: var(--navy); margin-top: 0.15rem;" id="result-lvl1-viewed">10 Kartu</div>
+              </div>
+              <div style="flex: 1; background-color: var(--teal-light); border: 2px solid var(--teal); border-radius: 1rem; padding: 0.65rem 0.5rem; text-align: center;">
+                <div style="font-size: 0.72rem; font-weight: 900; color: var(--teal-dark); text-transform: uppercase;">Sudah Paham</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: var(--navy); margin-top: 0.15rem;" id="result-lvl1-understood">3 Kartu</div>
+              </div>
+            </div>
+            <p style="font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--slate-600); line-height: 1.4; text-align: center;">
+              Bagus sekali! Mengenal suku kata adalah awal membaca yang hebat. 👏
+            </p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%; margin-top: 0.5rem;">
+            <button type="button" class="btn-3d btn-listen" style="margin-top: 0;" onclick="restartCurrentSession()">
+              <span>🔄</span>
+              <span>Main Lagi</span>
+            </button>
+            <button type="button" class="btn-3d" style="background-color: var(--sky-light); border-color: var(--navy); padding: 0.65rem 1rem; font-size: 0.9rem;" onclick="chooseAnotherLevel()">
+              <span>📋</span>
+              <span>Pilih Level Lain</span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1052,23 +1453,54 @@
       { char: 'Z', name: 'Zebra', emoji: '🦓', phonetic: '/ze · bra/' }
     ];
 
-    // Minimal 20 suku kata buka
+    // Minimal 40 suku kata dengan contoh kata konkret dan emoji akurat (Tahap 1 & Bug 1 Fix)
     const SYLLABLE_DATA = [
-      { syllable: 'BA', icon: '👶' }, { syllable: 'BI', icon: '⭐' }, { syllable: 'BU', icon: '📚' }, { syllable: 'BO', icon: '⚽' },
-      { syllable: 'CA', icon: '🍒' }, { syllable: 'CI', icon: '🐥' }, { syllable: 'CU', icon: '🧦' },
-      { syllable: 'DA', icon: '👔' }, { syllable: 'DI', icon: '🧭' }, { syllable: 'DU', icon: '🕊️' },
-      { syllable: 'GA', icon: '🐘' }, { syllable: 'GI', icon: '🦷' }, { syllable: 'GU', icon: '🍬' },
-      { syllable: 'HA', icon: '🐯' }, { syllable: 'HI', icon: '🦈' }, { syllable: 'HU', icon: '🌧️' },
-      { syllable: 'KA', icon: '🦶' }, { syllable: 'KI', icon: '🦌' }, { syllable: 'KU', icon: '🐴' },
-      { syllable: 'LA', icon: '🐝' }, { syllable: 'LI', icon: '🕯️' }, { syllable: 'LU', icon: '🐬' },
-      { syllable: 'MA', icon: '👀' }, { syllable: 'MI', icon: '🍜' }, { syllable: 'MU', icon: '🐮' },
-      { syllable: 'PA', icon: '🔨' }, { syllable: 'PI', icon: '🧢' }, { syllable: 'PU', icon: '🏝️' },
-      { syllable: 'RA', icon: '👑' }, { syllable: 'RO', icon: '🍞' }, { syllable: 'RU', icon: '🏠' },
-      { syllable: 'SA', icon: '🐮' }, { syllable: 'SI', icon: '🦁' }, { syllable: 'SU', icon: '🥛' },
-      { syllable: 'TA', icon: '🎒' }, { syllable: 'TI', icon: '🐁' }, { syllable: 'TU', icon: '🐿️' }
+      { syllable: 'BA', word: 'Bayi', icon: '👶' },
+      { syllable: 'BI', word: 'Bintang', icon: '⭐' },
+      { syllable: 'BU', word: 'Buku', icon: '📚' },
+      { syllable: 'BO', word: 'Bola', icon: '⚽' },
+      { syllable: 'CA', word: 'Cacing', icon: '🪱' },
+      { syllable: 'CI', word: 'Cincin', icon: '💍' },
+      { syllable: 'CU', word: 'Cumi', icon: '🦑' },
+      { syllable: 'DA', word: 'Dasi', icon: '👔' },
+      { syllable: 'DI', word: 'Dinding', icon: '🧱' },
+      { syllable: 'DU', word: 'Duku', icon: '🍈' },
+      { syllable: 'GA', word: 'Gajah', icon: '🐘' },
+      { syllable: 'GI', word: 'Gigi', icon: '🦷' },
+      { syllable: 'GU', word: 'Gula', icon: '🍬' },
+      { syllable: 'HA', word: 'Harimau', icon: '🐯' },
+      { syllable: 'HI', word: 'Hiu', icon: '🦈' },
+      { syllable: 'HU', word: 'Hujan', icon: '🌧️' },
+      { syllable: 'JA', word: 'Jam', icon: '⏰' },
+      { syllable: 'JI', word: 'Jerapah', icon: '🦒' },
+      { syllable: 'JU', word: 'Jeruk', icon: '🍊' },
+      { syllable: 'KA', word: 'Kaki', icon: '🦶' },
+      { syllable: 'KI', word: 'Kipas', icon: '🪭' },
+      { syllable: 'KU', word: 'Kuda', icon: '🐴' },
+      { syllable: 'LA', word: 'Labu', icon: '🎃' },
+      { syllable: 'LI', word: 'Lilin', icon: '🕯️' },
+      { syllable: 'LU', word: 'Lumba-lumba', icon: '🐬' },
+      { syllable: 'MA', word: 'Mata', icon: '👀' },
+      { syllable: 'MI', word: 'Mie', icon: '🍜' },
+      { syllable: 'MU', word: 'Mulut', icon: '👄' },
+      { syllable: 'NA', word: 'Nanas', icon: '🍍' },
+      { syllable: 'NI', word: 'Nasi', icon: '🍚' },
+      { syllable: 'PA', word: 'Paku', icon: '🔨' },
+      { syllable: 'PI', word: 'Pipi', icon: '😊' },
+      { syllable: 'PU', word: 'Pulau', icon: '🏝️' },
+      { syllable: 'RA', word: 'Raja', icon: '👑' },
+      { syllable: 'RI', word: 'Rusa', icon: '🦌' },
+      { syllable: 'RO', word: 'Roti', icon: '🍞' },
+      { syllable: 'RU', word: 'Rumah', icon: '🏠' },
+      { syllable: 'SA', word: 'Sapi', icon: '🐮' },
+      { syllable: 'SI', word: 'Singa', icon: '🦁' },
+      { syllable: 'SU', word: 'Susu', icon: '🥛' },
+      { syllable: 'TA', word: 'Tali', icon: '🪢' },
+      { syllable: 'TI', word: 'Tikus', icon: '🐭' },
+      { syllable: 'TU', word: 'Tupai', icon: '🐿️' }
     ];
 
-    // Minimal 15 kata 4-huruf
+    // Minimal 40 kata 4-huruf konkret (panjang tepat 4 karakter)
     const WORDS_4 = [
       { word: 'BOLA', emoji: '⚽' },
       { word: 'BUKU', emoji: '📚' },
@@ -1083,35 +1515,118 @@
       { word: 'PAKU', emoji: '🔨' },
       { word: 'RUSA', emoji: '🦌' },
       { word: 'SATU', emoji: '1️⃣' },
-      { word: 'DAGU', emoji: '🫠' },
+      { word: 'DAGU', emoji: '🧔' },
       { word: 'LIMA', emoji: '5️⃣' },
       { word: 'GIGI', emoji: '🦷' },
       { word: 'KAKI', emoji: '🦶' },
       { word: 'TALI', emoji: '🪢' },
       { word: 'MEJA', emoji: '🪑' },
-      { word: 'SUSU', emoji: '🥛' }
+      { word: 'SUSU', emoji: '🥛' },
+      { word: 'PIPI', emoji: '😊' },
+      { word: 'KERA', emoji: '🐒' },
+      { word: 'BUSA', emoji: '🫧' },
+      { word: 'NAGA', emoji: '🐉' },
+      { word: 'KADO', emoji: '🎁' },
+      { word: 'PITA', emoji: '🎀' },
+      { word: 'BATA', emoji: '🧱' },
+      { word: 'PALU', emoji: '🔨' },
+      { word: 'KACA', emoji: '🪞' },
+      { word: 'PADI', emoji: '🌾' },
+      { word: 'SAPU', emoji: '🧹' },
+      { word: 'LABU', emoji: '🎃' },
+      { word: 'TIGA', emoji: '3️⃣' },
+      { word: 'DUKU', emoji: '🍈' },
+      { word: 'IKAN', emoji: '🐟' },
+      { word: 'APEL', emoji: '🍎' },
+      { word: 'ULAR', emoji: '🐍' },
+      { word: 'ONTA', emoji: '🐫' },
+      { word: 'DAUN', emoji: '🍃' },
+      { word: 'AYAM', emoji: '🐔' },
+      { word: 'AWAN', emoji: '☁️' },
+      { word: 'CUMI', emoji: '🦑' },
+      { word: 'KOPI', emoji: '☕' },
+      { word: 'PETA', emoji: '🗺️' }
     ];
 
-    // Minimal 15 kata 5-6 huruf
+    // Minimal 40 kata 5-6 huruf konkret (panjang tepat 5 atau 6 karakter)
     const WORDS_LONG = [
+      // 5 Huruf (25 kata)
+      { word: 'JERUK', emoji: '🍊' },
+      { word: 'EMBER', emoji: '🪣' },
+      { word: 'BUNGA', emoji: '🌸' },
+      { word: 'GARPU', emoji: '🍴' },
+      { word: 'DOMBA', emoji: '🐑' },
+      { word: 'GAJAH', emoji: '🐘' },
+      { word: 'BEBEK', emoji: '🦆' },
+      { word: 'TIKUS', emoji: '🐭' },
+      { word: 'KAPAL', emoji: '🚢' },
+      { word: 'MOBIL', emoji: '🚗' },
+      { word: 'KERIS', emoji: '🗡️' },
+      { word: 'RUMAH', emoji: '🏠' },
+      { word: 'POHON', emoji: '🌳' },
+      { word: 'BULAN', emoji: '🌙' },
+      { word: 'HUJAN', emoji: '🌧️' },
+      { word: 'SINGA', emoji: '🦁' },
+      { word: 'BALON', emoji: '🎈' },
+      { word: 'PISAU', emoji: '🔪' },
+      { word: 'BOTOL', emoji: '🍾' },
+      { word: 'PINTU', emoji: '🚪' },
+      { word: 'ELANG', emoji: '🦅' },
+      { word: 'ZEBRA', emoji: '🦓' },
+      { word: 'SEMUT', emoji: '🐜' },
+      { word: 'NANAS', emoji: '🍍' },
+      { word: 'TUPAI', emoji: '🐿️' },
+      // 6 Huruf (20 kata)
+      { word: 'PISANG', emoji: '🍌' },
       { word: 'KANCIL', emoji: '🦌' },
       { word: 'MANGGA', emoji: '🥭' },
       { word: 'KELAPA', emoji: '🥥' },
-      { word: 'JERUK', emoji: '🍊' },
       { word: 'PENSIL', emoji: '✏️' },
-      { word: 'EMBER', emoji: '🪣' },
       { word: 'SEPATU', emoji: '👟' },
-      { word: 'BUNGA', emoji: '🌸' },
       { word: 'SENDOK', emoji: '🥄' },
-      { word: 'GARPU', emoji: '🍴' },
       { word: 'PAYUNG', emoji: '☂️' },
       { word: 'LANGIT', emoji: '☁️' },
       { word: 'KERBAU', emoji: '🐃' },
       { word: 'KUCING', emoji: '🐱' },
-      { word: 'DOMBA', emoji: '🐑' },
-      { word: 'GAJAH', emoji: '🐘' },
-      { word: 'BEBEK', emoji: '🦆' },
-      { word: 'WORTEL', emoji: '🥕' }
+      { word: 'WORTEL', emoji: '🥕' },
+      { word: 'KERTAS', emoji: '📄' },
+      { word: 'SENDAL', emoji: '🩴' },
+      { word: 'DOMPET', emoji: '👛' },
+      { word: 'CINCIN', emoji: '💍' },
+      { word: 'PIRING', emoji: '🍽️' },
+      { word: 'JAGUNG', emoji: '🌽' },
+      { word: 'BURUNG', emoji: '🐦' },
+      { word: 'KERETA', emoji: '🚆' }
+    ];
+
+    /* ==========================================================================
+       ATURAN DOMAIN F & G: KELOMPOK HURUF TERIKAT & TIPE HURUF (KLARIFIKASI 1)
+       ========================================================================== */
+    const VOWELS = ['A', 'E', 'I', 'O', 'U'];
+    const CONSONANTS = [
+      'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M',
+      'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'
+    ];
+
+    const CONFUSING_GROUPS = [
+      // Bentuk mirip:
+      ['B', 'D', 'P', 'Q'],
+      ['M', 'N', 'W'],
+      ['U', 'V'],
+      ['I', 'J', 'L'],
+      ['F', 'T'],
+      ['C', 'E'],
+      ['G', 'Q', 'Y'],
+      ['H', 'N'],
+      // Bunyi mirip:
+      ['S', 'Z'],
+      ['F', 'V'],
+      ['K', 'G'],
+      ['T', 'D'],
+      ['P', 'B'],
+      ['M', 'N'],
+      // Vokal:
+      ['A', 'E', 'I', 'O', 'U']
     ];
 
     /* ==========================================================================
@@ -1205,6 +1720,70 @@
         [copy[i], copy[j]] = [copy[j], copy[i]];
       }
       return copy;
+    }
+
+    // Algoritma Pengecoh Cerdas (Aturan G lalu Aturan F sesuai KLARIFIKASI 1)
+    function getDistractors(targetChar) {
+      const upper = targetChar.toUpperCase();
+      const isVowel = VOWELS.includes(upper);
+
+      // 1. Tentukan tipe huruf jawaban: vokal atau konsonan.
+      // 2. Buat daftar kandidat yang HANYA berisi huruf bertipe sama. Ini wajib dan tidak boleh dilanggar.
+      const candidatePool = (isVowel ? VOWELS : CONSONANTS).filter(c => c !== upper);
+
+      // 3. Dari daftar kandidat itu, prioritaskan huruf yang satu kelompok dengan jawaban di daftar huruf mudah tertukar.
+      const prioritySet = new Set();
+      CONFUSING_GROUPS.forEach(group => {
+        if (group.includes(upper)) {
+          group.forEach(member => {
+            // Hanya masukkan jika ada dalam candidatePool (artinya bertipe sama persis!)
+            if (member !== upper && candidatePool.includes(member)) {
+              prioritySet.add(member);
+            }
+          });
+        }
+      });
+
+      const priorityCandidates = shuffleArray(Array.from(prioritySet));
+      const chosenDistractors = [];
+
+      for (const char of priorityCandidates) {
+        if (chosenDistractors.length < 2) {
+          chosenDistractors.push(char);
+        }
+      }
+
+      // 4. Jika anggota sekelompok yang setipe kurang dari 2, lengkapi dengan huruf lain dari daftar kandidat setipe acak.
+      if (chosenDistractors.length < 2) {
+        const remainingPool = shuffleArray(candidatePool.filter(c => !chosenDistractors.includes(c)));
+        for (const char of remainingPool) {
+          if (chosenDistractors.length < 2) {
+            chosenDistractors.push(char);
+          }
+        }
+      }
+
+      return chosenDistractors;
+    }
+
+    // Helper acak huruf Level 5 (Klarifikasi 3: hasil acak tidak boleh sama persis dengan kata asli)
+    function getShuffledLettersForWord(word) {
+      const letters = word.split('');
+      let shuffled = shuffleArray([...letters]);
+      let attempts = 0;
+      while (shuffled.join('') === word && attempts < 20) {
+        shuffled = shuffleArray([...letters]);
+        attempts++;
+      }
+      if (shuffled.join('') === word && shuffled.length > 1) {
+        for (let i = 0; i < shuffled.length - 1; i++) {
+          if (shuffled[i] !== shuffled[i + 1]) {
+            [shuffled[i], shuffled[i + 1]] = [shuffled[i + 1], shuffled[i]];
+            break;
+          }
+        }
+      }
+      return shuffled;
     }
 
     /* ==========================================================================
@@ -1492,13 +2071,20 @@
     }
 
     /* ==========================================================================
-       TAHAP 5 & ATURAN B, C: MODE BACA KATA LEVEL 1 (SUKU KATA)
+       TAHAP 3, 4, 5: MODE BACA KATA (5 LEVEL, SESI, & SUSUN HURUF)
        ========================================================================== */
-    let currentBacaLevel = 1;
-    let shuffledSyllables = [];
-    let currentSyllableIdx = 0;
+    let currentBacaLevel = 1;      // 1 to 5
+    let sessionLength = 10;        // 10, 15, or 20 (Aturan H, default 10)
+    let sessionQuestions = [];     // Bank soal sesi aktif
+    let sessionIndex = 0;          // Indeks soal aktif (0-indexed)
+    let sessionScore = 0;          // Skor bintang sesi (Level 2-5)
+    let sessionErrors = [];        // Daftar kata salah (Aturan I)
 
-    // Helper localStorage dengan try-catch aman (ATURAN C)
+    // Level 1 specific stats (Klarifikasi 2)
+    let lvl1UnderstoodInSession = 0;
+    let lvl1ViewedSet = new Set();
+
+    // Helper localStorage dengan try-catch aman (Aturan C)
     function getMasteredSyllables() {
       try {
         const raw = localStorage.getItem('syllable_mastered');
@@ -1518,31 +2104,121 @@
       } catch (e) {}
     }
 
-    // Inisialisasi Level 1 dengan Fisher-Yates dan filter mastered
-    function initLevel1() {
+    function resetSyllableMasteredForTest() {
+      try {
+        localStorage.removeItem('syllable_mastered');
+      } catch (e) {}
+      initLevel1Session();
+    }
+
+    // Pemilihan Panjang Sesi (Aturan H)
+    function setSessionLength(len) {
+      sessionLength = len;
+      [10, 15, 20].forEach(n => {
+        const btn = document.getElementById(`btn-session-${n}`);
+        if (btn) {
+          if (n === len) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        }
+      });
+      startBacaSession();
+    }
+
+    // Pemilihan Level Baca Kata (1 sampai 5)
+    function switchBacaLevel(levelNum) {
+      currentBacaLevel = levelNum;
+
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById(`btn-lvl-${i}`);
+        if (btn) {
+          if (i === levelNum) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        }
+      }
+
+      startBacaSession();
+    }
+
+    // Inisialisasi Sesi Baru pada Level yang Dipilih
+    function startBacaSession() {
+      // Sembunyikan result screen
+      document.getElementById('subpane-baca-result').classList.add('hidden');
+
+      sessionIndex = 0;
+      sessionScore = 0;
+      sessionErrors = [];
+
+      const paneLvl1 = document.getElementById('subpane-lvl-1');
+      const paneQuiz = document.getElementById('subpane-lvl-quiz');
+      const paneLvl5 = document.getElementById('subpane-lvl-5');
+
+      paneLvl1.classList.add('hidden');
+      paneQuiz.classList.add('hidden');
+      paneLvl5.classList.add('hidden');
+
+      if (currentBacaLevel === 1) {
+        paneLvl1.classList.remove('hidden');
+        initLevel1Session();
+      } else if (currentBacaLevel >= 2 && currentBacaLevel <= 4) {
+        paneQuiz.classList.remove('hidden');
+        initQuizSession();
+      } else if (currentBacaLevel === 5) {
+        paneLvl5.classList.remove('hidden');
+        initScrambleSession();
+      }
+    }
+
+    function resetCurrentSession() {
+      const confirmed = window.confirm('Mulai ulang sesi latihan ini dari awal?');
+      if (!confirmed) return;
+      startBacaSession();
+    }
+
+    function restartCurrentSession() {
+      startBacaSession();
+    }
+
+    function chooseAnotherLevel() {
+      document.getElementById('subpane-baca-result').classList.add('hidden');
+      switchBacaLevel(1);
+      const nav = document.querySelector('.sub-nav');
+      if (nav) nav.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* --------------------------------------------------------------------------
+       LEVEL 1: KENAL SUKU KATA (KLARIFIKASI 2: TANPA SKOR)
+       -------------------------------------------------------------------------- */
+    function initLevel1Session() {
       const now = Date.now();
       const mastered = getMasteredSyllables();
 
-      // ATURAN B: Salin SYLLABLE_DATA ke array baru, acak dengan Fisher-Yates.
-      // Array asli TIDAK BOLEH dimutasi.
+      // Aturan B: Salin SYLLABLE_DATA ke array baru, acak dengan Fisher-Yates
       const shuffled = shuffleArray([...SYLLABLE_DATA]);
 
-      // ATURAN C: Filter kartu yang kedaluwarsanya belum lewat
-      shuffledSyllables = shuffled.filter(item => {
+      // Aturan C: Filter kartu yang kedaluwarsanya belum lewat
+      const available = shuffled.filter(item => {
         const expiry = mastered[item.syllable];
         return !expiry || expiry < now;
       });
 
-      currentSyllableIdx = 0;
-      renderSyllableCard();
-    }
+      // KLARIFIKASI 2: Gunakan sisa kartu jika kurang dari sessionLength, jangan duplikasi
+      const actualCount = Math.min(sessionLength, available.length);
+      sessionQuestions = available.slice(0, actualCount);
 
-    function renderSyllableCard() {
+      sessionIndex = 0;
+      lvl1UnderstoodInSession = 0;
+      lvl1ViewedSet = new Set();
+
       const cardContent = document.getElementById('lvl1-card-content');
       const allMastered = document.getElementById('lvl1-all-mastered');
 
-      // Jika semua kartu sudah dikuasai
-      if (shuffledSyllables.length === 0) {
+      if (sessionQuestions.length === 0) {
         cardContent.classList.add('hidden');
         allMastered.classList.remove('hidden');
         return;
@@ -1550,130 +2226,178 @@
 
       cardContent.classList.remove('hidden');
       allMastered.classList.add('hidden');
+      renderLevel1Card();
+    }
 
-      if (currentSyllableIdx >= shuffledSyllables.length) {
-        currentSyllableIdx = 0;
+    function renderLevel1Card() {
+      if (sessionIndex >= sessionQuestions.length) {
+        showSessionResult();
+        return;
       }
 
-      const item = shuffledSyllables[currentSyllableIdx];
+      const item = sessionQuestions[sessionIndex];
+      lvl1ViewedSet.add(item.syllable);
+
       document.getElementById('lvl1-card-indicator').textContent = 
-        `Kartu ${currentSyllableIdx + 1} dari ${shuffledSyllables.length}`;
+        `Kartu ${sessionIndex + 1} dari ${sessionQuestions.length}`;
       document.getElementById('lvl1-syllable-text').textContent = item.syllable;
       document.getElementById('lvl1-syllable-icon').textContent = item.icon || '⭐';
-      document.getElementById('lvl1-syllable-helper').textContent = item.syllable;
+      document.getElementById('lvl1-syllable-word').textContent = item.word || item.syllable;
     }
 
     function navigateSyllable(dir) {
-      if (shuffledSyllables.length === 0) return;
-      const total = shuffledSyllables.length;
-      currentSyllableIdx = (currentSyllableIdx + dir + total) % total;
-      renderSyllableCard();
+      if (sessionQuestions.length === 0) return;
+      const nextIdx = sessionIndex + dir;
+      if (nextIdx < 0) {
+        sessionIndex = sessionQuestions.length - 1;
+      } else if (nextIdx >= sessionQuestions.length) {
+        showSessionResult();
+        return;
+      } else {
+        sessionIndex = nextIdx;
+      }
+      renderLevel1Card();
       speakCurrentSyllable();
     }
 
     function speakCurrentSyllable() {
-      if (shuffledSyllables.length > 0) {
-        const item = shuffledSyllables[currentSyllableIdx];
-        speak(item.syllable);
+      if (sessionQuestions.length > 0 && sessionIndex < sessionQuestions.length) {
+        const item = sessionQuestions[sessionIndex];
+        speak(`${item.syllable}... ${item.word || ''}`);
       }
     }
 
     function markCurrentSyllableUnderstood() {
-      if (shuffledSyllables.length === 0) return;
-      const item = shuffledSyllables[currentSyllableIdx];
+      if (sessionQuestions.length === 0 || sessionIndex >= sessionQuestions.length) return;
+      const item = sessionQuestions[sessionIndex];
       saveMasteredSyllable(item.syllable);
+      lvl1UnderstoodInSession++;
 
       playBeep('success');
       triggerHaptic();
 
-      // Hapus dari array aktif
-      shuffledSyllables.splice(currentSyllableIdx, 1);
-
-      if (currentSyllableIdx >= shuffledSyllables.length) {
-        currentSyllableIdx = 0;
-      }
-
-      renderSyllableCard();
-      if (shuffledSyllables.length > 0) {
+      sessionIndex++;
+      if (sessionIndex >= sessionQuestions.length) {
+        showSessionResult();
+      } else {
+        renderLevel1Card();
         speakCurrentSyllable();
       }
     }
 
-    function resetSyllableMasteredForTest() {
-      try {
-        localStorage.removeItem('syllable_mastered');
-      } catch (e) {}
-      initLevel1();
+    /* --------------------------------------------------------------------------
+       LEVEL 2, 3, 4: LENGKAPI HURUF (QUIZ DENGAN ATURAN G & F)
+       -------------------------------------------------------------------------- */
+    let currentQuizItem = null;
+    let isQuizAnswered = false;
+    let quizCurrentHadError = false;
+
+    function initQuizSession() {
+      let sourceData = [];
+      if (currentBacaLevel === 2) {
+        sourceData = SYLLABLE_DATA;
+      } else if (currentBacaLevel === 3) {
+        sourceData = WORDS_4;
+      } else if (currentBacaLevel === 4) {
+        sourceData = WORDS_LONG;
+      }
+
+      const shuffled = shuffleArray([...sourceData]);
+      sessionQuestions = shuffled.slice(0, Math.min(sessionLength, shuffled.length));
+      sessionIndex = 0;
+      sessionScore = 0;
+      sessionErrors = [];
+
+      document.getElementById('lvl-quiz-score-val').textContent = '0';
+      generateQuizQuestionCard();
     }
 
-    /* ==========================================================================
-       TAHAP 6 & 7 & ATURAN D: BACA KATA LEVEL 2 & LEVEL 3 (HURUF HILANG ACAK)
-       ========================================================================== */
-    let currentWordList = [];
-    let currentWordIndex = 0;
-    let wordScore = 0;
-    let currentWordQuiz = null;
+    function generateQuizQuestionCard() {
+      if (sessionIndex >= sessionQuestions.length) {
+        showSessionResult();
+        return;
+      }
 
-    function initWordLevel(levelNum) {
-      const sourceData = levelNum === 2 ? WORDS_4 : WORDS_LONG;
-      currentWordList = shuffleArray([...sourceData]);
-      currentWordIndex = 0;
-      wordScore = 0;
-      document.getElementById('lvl-word-score-val').textContent = wordScore;
-      generateWordQuizQuestion();
-    }
+      isQuizAnswered = false;
+      quizCurrentHadError = false;
 
-    // ATURAN DOMAIN D: Posisi huruf hilang diacak, 2 pengecoh unik acak
-    function generateWordQuizQuestion() {
-      const wordObj = currentWordList[currentWordIndex];
-      const word = wordObj.word;
+      const qItem = sessionQuestions[sessionIndex];
+      const indicator = document.getElementById('lvl-quiz-progress');
+      indicator.textContent = `Soal ${sessionIndex + 1} dari ${sessionQuestions.length}`;
 
-      // 1. Posisi huruf yang dikosongkan diacak di setiap soal
-      const missingIndex = Math.floor(Math.random() * word.length);
-      const correctLetter = word[missingIndex];
+      const mascotArea = document.getElementById('lvl-quiz-mascot-area');
+      const emojiEl = document.getElementById('lvl-quiz-emoji');
+      const syllableHint = document.getElementById('lvl-quiz-syllable-hint');
+      const wordDisplay = document.getElementById('lvl-quiz-word-display');
+      const banner = document.getElementById('lvl-quiz-feedback-banner');
+      const nextBtn = document.getElementById('btn-lvl-quiz-next');
+      const listenText = document.getElementById('lvl-quiz-listen-text');
 
-      // 2. Dua huruf salah (pengecoh) acak dari A-Z, tidak boleh sama dengan correctLetter dan tidak kembar
-      const alphabetChars = ALPHABET_DATA.map(a => a.char).filter(c => c !== correctLetter);
-      const shuffledAlphabet = shuffleArray(alphabetChars);
-      const distractor1 = shuffledAlphabet[0];
-      const distractor2 = shuffledAlphabet[1];
+      banner.className = 'feedback-banner';
+      banner.textContent = '';
+      nextBtn.classList.add('hidden');
 
-      // 3. Urutan 3 pilihan diacak
-      const choices = shuffleArray([correctLetter, distractor1, distractor2]);
+      let targetText = '';
+      let correctLetter = '';
+      let missingIndex = 0;
 
-      currentWordQuiz = {
-        wordObj: wordObj,
-        word: word,
-        missingIndex: missingIndex,
-        correctLetter: correctLetter,
-        choices: choices,
-        isAnswered: false
-      };
+      if (currentBacaLevel === 2) {
+        // Level 2: Lengkapi Suku Kata (misal "BU")
+        targetText = qItem.syllable;
+        missingIndex = Math.random() < 0.5 ? 0 : 1;
+        correctLetter = targetText[missingIndex];
 
-      // Render UI
-      document.getElementById('lvl-word-progress').textContent = 
-        `Kata ${currentWordIndex + 1} dari ${currentWordList.length}`;
+        mascotArea.style.display = 'none';
+        syllableHint.classList.remove('hidden');
+        document.getElementById('lvl-quiz-hint-icon').textContent = qItem.icon || '📚';
+        document.getElementById('lvl-quiz-hint-word').textContent = qItem.word || qItem.syllable;
+        listenText.textContent = 'Dengarkan Suku Kata';
 
-      const wordDisplay = document.getElementById('lvl-word-display');
-      wordDisplay.className = currentBacaLevel === 3 ? 'word-slot-container dense' : 'word-slot-container';
+        wordDisplay.className = 'syllable-slot-box';
+      } else {
+        // Level 3 & 4: Kata 4 Huruf / Kata Panjang
+        targetText = qItem.word;
+        missingIndex = Math.floor(Math.random() * targetText.length);
+        correctLetter = targetText[missingIndex];
+
+        mascotArea.style.display = 'flex';
+        emojiEl.textContent = qItem.emoji || '📖';
+        syllableHint.classList.add('hidden');
+        listenText.textContent = 'Dengarkan Kata';
+
+        wordDisplay.className = (currentBacaLevel === 4) ? 'word-slot-container dense' : 'word-slot-container';
+      }
+
+      // Render slots
       wordDisplay.innerHTML = '';
-
-      for (let i = 0; i < word.length; i++) {
+      for (let i = 0; i < targetText.length; i++) {
         if (i === missingIndex) {
           const slot = document.createElement('span');
           slot.className = 'missing-slot';
-          slot.id = 'word-missing-slot';
+          slot.id = 'quiz-missing-slot';
           slot.textContent = '_';
           wordDisplay.appendChild(slot);
         } else {
           const span = document.createElement('span');
-          span.textContent = word[i];
+          span.textContent = targetText[i];
           wordDisplay.appendChild(span);
         }
       }
 
+      // Pengecoh Cerdas dengan Aturan G lalu F (Klarifikasi 1)
+      const distractors = getDistractors(correctLetter);
+      const choices = shuffleArray([correctLetter, distractors[0], distractors[1]]);
+
+      currentQuizItem = {
+        item: qItem,
+        targetText: targetText,
+        correctLetter: correctLetter,
+        missingIndex: missingIndex,
+        choices: choices
+      };
+
       // Render options grid
-      const optionsGrid = document.getElementById('lvl-word-options-grid');
+      const optionsGrid = document.getElementById('lvl-quiz-options-grid');
       optionsGrid.innerHTML = '';
 
       choices.forEach(char => {
@@ -1681,59 +2405,55 @@
         btn.type = 'button';
         btn.className = 'btn-3d btn-choice';
         btn.textContent = char;
-        btn.onclick = () => handleWordQuizAnswer(btn, char);
+        btn.onclick = () => handleQuizChoice(btn, char);
         optionsGrid.appendChild(btn);
       });
-
-      const banner = document.getElementById('lvl-word-feedback-banner');
-      banner.className = 'feedback-banner';
-      banner.textContent = '';
-
-      const nextBtn = document.getElementById('btn-lvl-word-next');
-      nextBtn.classList.add('hidden');
     }
 
-    function handleWordQuizAnswer(btn, chosenChar) {
-      if (currentWordQuiz.isAnswered) return;
+    function handleQuizChoice(btn, chosenChar) {
+      if (isQuizAnswered) return;
 
-      const slot = document.getElementById('word-missing-slot');
-      const banner = document.getElementById('lvl-word-feedback-banner');
-      const starBadge = document.getElementById('lvl-word-star-badge');
-      const scoreVal = document.getElementById('lvl-word-score-val');
-      const nextBtn = document.getElementById('btn-lvl-word-next');
-      const allBtns = document.querySelectorAll('#lvl-word-options-grid button');
+      const slot = document.getElementById('quiz-missing-slot');
+      const banner = document.getElementById('lvl-quiz-feedback-banner');
+      const starBadge = document.getElementById('lvl-quiz-star-badge');
+      const scoreVal = document.getElementById('lvl-quiz-score-val');
+      const nextBtn = document.getElementById('btn-lvl-quiz-next');
+      const allBtns = document.querySelectorAll('#lvl-quiz-options-grid button');
 
-      if (chosenChar === currentWordQuiz.correctLetter) {
+      if (chosenChar === currentQuizItem.correctLetter) {
         // BENAR
-        currentWordQuiz.isAnswered = true;
+        isQuizAnswered = true;
         allBtns.forEach(b => b.disabled = true);
         btn.classList.add('correct');
 
         slot.textContent = chosenChar;
         slot.className = 'missing-slot filled-correct';
 
-        wordScore++;
-        scoreVal.textContent = wordScore;
-
-        starBadge.classList.remove('animate-star');
-        void starBadge.offsetWidth;
-        starBadge.classList.add('animate-star');
+        if (!quizCurrentHadError) {
+          sessionScore++;
+          scoreVal.textContent = sessionScore;
+          starBadge.classList.remove('animate-star');
+          void starBadge.offsetWidth;
+          starBadge.classList.add('animate-star');
+        }
 
         playBeep('success');
         triggerHaptic();
-        speak(`${chosenChar}! Hebat, ${currentWordQuiz.word}!`);
+
+        const successText = currentBacaLevel === 2 ? currentQuizItem.targetText : `${currentQuizItem.targetText} ${currentQuizItem.item.emoji || ''}`;
+        speak(`Benar! ${chosenChar}... ${currentQuizItem.targetText}!`);
 
         banner.className = 'feedback-banner success';
-        banner.innerHTML = `🎉 Betul sekali! <strong>${currentWordQuiz.word}</strong> ${currentWordQuiz.wordObj.emoji || ''}`;
+        banner.innerHTML = `🎉 Betul sekali! <strong>${successText}</strong>`;
 
         nextBtn.classList.remove('hidden');
 
-        // Otomatis lanjut jika tidak ditekan dalam 2.2 detik
+        // Otomatis lanjut jika tidak ditekan dalam 1.8 detik
         setTimeout(() => {
-          if (currentWordQuiz && currentWordQuiz.isAnswered) {
-            nextWordQuizQuestion();
+          if (isQuizAnswered) {
+            advanceQuizQuestion();
           }
-        }, 2200);
+        }, 1800);
       } else {
         // SALAH
         slot.textContent = chosenChar;
@@ -1742,6 +2462,11 @@
 
         playBeep('try-again');
         speak('Bukan');
+
+        if (!sessionErrors.includes(currentQuizItem.targetText)) {
+          sessionErrors.push(currentQuizItem.targetText);
+        }
+        quizCurrentHadError = true;
 
         banner.className = 'feedback-banner try-again';
         banner.innerHTML = `Coba lagi ya! Bukan huruf <strong>${chosenChar}</strong> 💡`;
@@ -1754,42 +2479,306 @@
       }
     }
 
-    function nextWordQuizQuestion() {
-      if (currentWordIndex < currentWordList.length - 1) {
-        currentWordIndex++;
-        generateWordQuizQuestion();
-      } else {
-        // Selesai seluruh kata
-        const banner = document.getElementById('lvl-word-feedback-banner');
-        banner.className = 'feedback-banner success';
-        banner.innerHTML = `🏆 Luar biasa! Semua kata sudah selesai dengan skor <strong>${wordScore}</strong> Bintang!`;
-        document.getElementById('btn-lvl-word-next').classList.add('hidden');
-        speak(`Luar biasa! Kamu menyelesaikan semua kata!`);
+    function advanceQuizQuestion() {
+      sessionIndex++;
+      generateQuizQuestionCard();
+    }
+
+    function speakCurrentQuizQuestion() {
+      if (currentQuizItem) {
+        speak(currentQuizItem.targetText);
       }
     }
 
-    function speakCurrentWordQuestion() {
-      if (currentWordQuiz) {
-        speak(currentWordQuiz.word);
+    /* --------------------------------------------------------------------------
+       LEVEL 5: SUSUN HURUF (KLARIFIKASI 3 & 4)
+       -------------------------------------------------------------------------- */
+    let scrambleSlots = [];
+    let scramblePool = [];
+    let isScrambleLocked = false;
+    let scrambleCurrentHadError = false;
+
+    function initScrambleSession() {
+      // KLARIFIKASI 3: WORDS_4 dan WORDS_LONG digabung, HANYA kata 4-5 huruf (tidak ada 6 huruf)
+      const combined = [...WORDS_4, ...WORDS_LONG].filter(item => item.word.length >= 4 && item.word.length <= 5);
+      const shuffled = shuffleArray(combined);
+      sessionQuestions = shuffled.slice(0, Math.min(sessionLength, shuffled.length));
+      sessionIndex = 0;
+      sessionScore = 0;
+      sessionErrors = [];
+
+      document.getElementById('lvl5-score-val').textContent = '0';
+      generateScrambleQuestion();
+    }
+
+    function generateScrambleQuestion() {
+      if (sessionIndex >= sessionQuestions.length) {
+        showSessionResult();
+        return;
+      }
+
+      isScrambleLocked = false;
+      scrambleCurrentHadError = false;
+
+      const qItem = sessionQuestions[sessionIndex];
+      const word = qItem.word;
+
+      document.getElementById('lvl5-progress').textContent = 
+        `Soal ${sessionIndex + 1} dari ${sessionQuestions.length}`;
+      document.getElementById('lvl5-mascot-emoji').textContent = qItem.emoji || '📖';
+
+      const banner = document.getElementById('lvl5-feedback-banner');
+      banner.className = 'feedback-banner';
+      banner.textContent = '';
+
+      // KLARIFIKASI 3: Huruf tepat sejumlah kata, urutan teracak dan tidak sama persis dengan kata asli
+      const shuffledLetters = getShuffledLettersForWord(word);
+
+      scramblePool = shuffledLetters.map((char, idx) => ({
+        id: idx,
+        letter: char,
+        isUsed: false
+      }));
+
+      scrambleSlots = new Array(word.length).fill(null);
+
+      renderScrambleUI();
+    }
+
+    function renderScrambleUI() {
+      const slotsContainer = document.getElementById('lvl5-slots-container');
+      const poolContainer = document.getElementById('lvl5-pool-container');
+
+      slotsContainer.innerHTML = '';
+      scrambleSlots.forEach((slotData, slotIdx) => {
+        const slotEl = document.createElement('div');
+        slotEl.className = `scramble-slot ${slotData ? 'filled' : ''}`;
+        slotEl.textContent = slotData ? slotData.letter : '';
+        slotEl.onclick = () => {
+          if (isScrambleLocked || !slotData) return;
+          unslotLetter(slotIdx);
+        };
+        slotsContainer.appendChild(slotEl);
+      });
+
+      poolContainer.innerHTML = '';
+      scramblePool.forEach((item, poolIdx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-letter-scramble';
+        btn.textContent = item.letter;
+        btn.disabled = item.isUsed || isScrambleLocked;
+        btn.onclick = () => {
+          if (isScrambleLocked || item.isUsed) return;
+          slotLetter(poolIdx);
+        };
+        poolContainer.appendChild(btn);
+      });
+    }
+
+    function slotLetter(poolIdx) {
+      if (isScrambleLocked) return;
+      const firstEmptySlotIdx = scrambleSlots.findIndex(s => s === null);
+      if (firstEmptySlotIdx === -1) return;
+
+      const poolItem = scramblePool[poolIdx];
+      poolItem.isUsed = true;
+      scrambleSlots[firstEmptySlotIdx] = {
+        letter: poolItem.letter,
+        poolIdx: poolIdx
+      };
+
+      renderScrambleUI();
+      checkScrambleCompletion();
+    }
+
+    function unslotLetter(slotIdx) {
+      if (isScrambleLocked) return;
+      const slotData = scrambleSlots[slotIdx];
+      if (!slotData) return;
+
+      scramblePool[slotData.poolIdx].isUsed = false;
+      scrambleSlots[slotIdx] = null;
+
+      renderScrambleUI();
+    }
+
+    function undoLastScrambleLetter() {
+      if (isScrambleLocked) return;
+      for (let i = scrambleSlots.length - 1; i >= 0; i--) {
+        if (scrambleSlots[i] !== null) {
+          unslotLetter(i);
+          break;
+        }
+      }
+    }
+
+    function resetScrambleSlots() {
+      if (isScrambleLocked) return;
+      scramblePool.forEach(p => p.isUsed = false);
+      scrambleSlots = new Array(scrambleSlots.length).fill(null);
+      renderScrambleUI();
+    }
+
+    function checkScrambleCompletion() {
+      const isComplete = scrambleSlots.every(s => s !== null);
+      if (!isComplete) return;
+
+      const qItem = sessionQuestions[sessionIndex];
+      const assembledWord = scrambleSlots.map(s => s.letter).join('');
+      const targetWord = qItem.word;
+
+      isScrambleLocked = true;
+
+      const slotEls = document.querySelectorAll('#lvl5-slots-container .scramble-slot');
+      const banner = document.getElementById('lvl5-feedback-banner');
+
+      if (assembledWord === targetWord) {
+        // BENAR
+        slotEls.forEach(el => {
+          el.classList.remove('filled-wrong');
+          el.classList.add('filled-correct');
+        });
+
+        playBeep('success');
+        triggerHaptic();
+
+        if (!scrambleCurrentHadError) {
+          sessionScore++;
+          document.getElementById('lvl5-score-val').textContent = sessionScore;
+          const starBadge = document.getElementById('lvl5-star-badge');
+          starBadge.classList.remove('animate-star');
+          void starBadge.offsetWidth;
+          starBadge.classList.add('animate-star');
+        }
+
+        speak(`Hebat! ${targetWord}!`);
+
+        banner.className = 'feedback-banner success';
+        banner.innerHTML = `🎉 Betul sekali! <strong>${targetWord}</strong> ${qItem.emoji || ''}`;
+
+        setTimeout(() => {
+          sessionIndex++;
+          generateScrambleQuestion();
+        }, 1600);
+      } else {
+        // SALAH (KLARIFIKASI 4)
+        slotEls.forEach(el => {
+          el.classList.add('filled-wrong', 'shake-anim');
+        });
+
+        playBeep('try-again');
+        speak(targetWord); // Bunyikan kembali kata yang benar lewat suara
+
+        if (!sessionErrors.includes(targetWord)) {
+          sessionErrors.push(targetWord);
+        }
+        scrambleCurrentHadError = true;
+
+        banner.className = 'feedback-banner try-again';
+        banner.innerHTML = `Yuk coba lagi susun hurufnya! 💡`;
+
+        // Setelah sekitar 1 detik, kosongkan semua slot dan kembalikan huruf ke posisi pilihan
+        setTimeout(() => {
+          resetScrambleSlots();
+          isScrambleLocked = false;
+          banner.className = 'feedback-banner';
+          banner.textContent = '';
+        }, 1100);
+      }
+    }
+
+    function speakCurrentScrambleWord() {
+      if (sessionQuestions[sessionIndex]) {
+        speak(sessionQuestions[sessionIndex].word);
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       LAYAR HASIL SESI (ATURAN I & KLARIFIKASI 2)
+       -------------------------------------------------------------------------- */
+    function showSessionResult() {
+      document.getElementById('subpane-lvl-1').classList.add('hidden');
+      document.getElementById('subpane-lvl-quiz').classList.add('hidden');
+      document.getElementById('subpane-lvl-5').classList.add('hidden');
+
+      const resultPane = document.getElementById('subpane-baca-result');
+      resultPane.classList.remove('hidden');
+
+      const statsScored = document.getElementById('result-stats-scored');
+      const statsLvl1 = document.getElementById('result-stats-lvl1');
+      const titleEl = document.getElementById('result-title');
+      const subtitleEl = document.getElementById('result-subtitle');
+      const iconEl = document.getElementById('result-icon');
+
+      if (currentBacaLevel === 1) {
+        // KLARIFIKASI 2: Level 1 tidak memakai sistem skor
+        statsScored.style.display = 'none';
+        statsLvl1.style.display = 'flex';
+
+        iconEl.textContent = '🌱';
+        titleEl.textContent = 'Sesi Selesai! Hebat!';
+        subtitleEl.textContent = 'Latihan Suku Kata selesai dengan sangat baik!';
+
+        document.getElementById('result-lvl1-viewed').textContent = `${lvl1ViewedSet.size} Kartu`;
+        document.getElementById('result-lvl1-understood').textContent = `${lvl1UnderstoodInSession} Kartu`;
+
+        speak(`Hebat! Kamu sudah menyelesaikan sesi suku kata hari ini!`);
+      } else {
+        // Level 2 sampai 5 (Skor Bintang & Evaluasi Kata Salah)
+        statsScored.style.display = 'flex';
+        statsLvl1.style.display = 'none';
+
+        const totalQ = sessionQuestions.length;
+        document.getElementById('result-score-ratio').textContent = `${sessionScore} / ${totalQ}`;
+        document.getElementById('result-stars').textContent = `⭐ ${sessionScore}`;
+
+        const wrongBox = document.getElementById('result-wrong-box');
+        const wrongList = document.getElementById('result-wrong-list');
+        const perfectBox = document.getElementById('result-perfect-box');
+
+        if (sessionErrors.length > 0) {
+          wrongBox.style.display = 'block';
+          perfectBox.style.display = 'none';
+          wrongList.innerHTML = '';
+          sessionErrors.forEach(errItem => {
+            const tag = document.createElement('span');
+            tag.className = 'result-eval-badge';
+            tag.textContent = errItem;
+            wrongList.appendChild(tag);
+          });
+        } else {
+          wrongBox.style.display = 'none';
+          perfectBox.style.display = 'block';
+        }
+
+        if (sessionScore === totalQ) {
+          iconEl.textContent = '🏆';
+          titleEl.textContent = 'Sempurna! Luar Biasa!';
+          subtitleEl.textContent = 'Semua soal berhasil kamu selesaikan dengan benar!';
+          speak(`Luar biasa! Sempurna! Kamu dapat ${sessionScore} bintang!`);
+        } else {
+          iconEl.textContent = '🎉';
+          titleEl.textContent = 'Sesi Selesai! Pintar!';
+          subtitleEl.textContent = 'Kamu hebat dan pantang menyerah belajar membaca!';
+          speak(`Hebat! Kamu menyelesaikan latihan dan dapat ${sessionScore} bintang!`);
+        }
       }
     }
 
     /* ==========================================================================
-       TAHAP 8: TAB SWITCHING & SUB-LEVEL NAVIGATION
+       TAB SWITCHING
        ========================================================================== */
     function switchTab(tabName) {
-      // Sembunyikan semua tab pane
       document.querySelectorAll('.tab-pane').forEach(p => {
         p.classList.add('hidden');
         p.style.display = 'none';
       });
 
-      // Reset tombol navigasi
       document.querySelectorAll('.main-nav button').forEach(b => {
         b.classList.remove('active');
       });
 
-      // Tampilkan tab aktif
       const targetPane = document.getElementById(`pane-${tabName}`);
       const targetBtn = document.getElementById(`tab-btn-${tabName}`);
 
@@ -1799,40 +2788,10 @@
         targetBtn.classList.add('active');
       }
 
-      // Initializer per tab
       if (tabName === 'tebak') {
         generateQuizQuestion();
       } else if (tabName === 'baca') {
         switchBacaLevel(currentBacaLevel);
-      }
-    }
-
-    function switchBacaLevel(levelNum) {
-      currentBacaLevel = levelNum;
-
-      // Update button styles
-      for (let i = 1; i <= 3; i++) {
-        const btn = document.getElementById(`btn-lvl-${i}`);
-        if (btn) {
-          if (i === levelNum) {
-            btn.classList.add('active');
-          } else {
-            btn.classList.remove('active');
-          }
-        }
-      }
-
-      const paneLvl1 = document.getElementById('subpane-lvl-1');
-      const paneWord = document.getElementById('subpane-lvl-word');
-
-      if (levelNum === 1) {
-        paneLvl1.classList.remove('hidden');
-        paneWord.classList.add('hidden');
-        initLevel1();
-      } else {
-        paneLvl1.classList.add('hidden');
-        paneWord.classList.remove('hidden');
-        initWordLevel(levelNum);
       }
     }
 
