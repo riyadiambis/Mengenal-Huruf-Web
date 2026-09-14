@@ -1019,3 +1019,689 @@ footer.app-footer small {
 .hidden {
   display: none !important;
 }
+
+/* ==========================================================================
+   RESPONSIVE ADAPTIVE LAYOUT: TABLET (768px - 1023px, breakpoint min-width: 750px)
+   ========================================================================== */
+@media (min-width: 750px) {
+  body {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .app-container {
+    max-width: 720px;
+    gap: 1.25rem;
+  }
+
+  footer.app-footer {
+    max-width: 720px;
+    padding: 1.75rem 0 1.25rem;
+  }
+
+  footer.app-footer p {
+    font-size: 0.9rem;
+  }
+
+  footer.app-footer small {
+    font-size: 0.8rem;
+  }
+
+  /* Header & Title */
+  h1.app-title {
+    font-size: 2.75rem;
+  }
+
+  p.app-subtitle {
+    font-size: 1.15rem;
+  }
+
+  .balloon-icon {
+    font-size: 2rem;
+    top: -1rem;
+    right: -2rem;
+  }
+
+  /* Nav Tabs */
+  .nav-tabs {
+    gap: 0.75rem;
+  }
+
+  .tab-btn {
+    height: 3.6rem;
+    min-height: 56px;
+    font-size: 1.05rem;
+    border-radius: 1.25rem;
+    border-width: 3px;
+    box-shadow: 0 5px 0 var(--navy);
+  }
+
+  .tab-btn svg {
+    width: 1.35em;
+    height: 1.35em;
+  }
+
+  /* Chunky Cards: Batas dan Bayangan Menyesuaikan */
+  .chunky-card {
+    border-width: 3.5px;
+    border-radius: 2rem;
+    box-shadow: 0 8px 0 var(--navy);
+    padding: 1.5rem 1.75rem;
+  }
+
+  .filter-card {
+    padding: 1rem 1.25rem;
+    gap: 0.85rem;
+    border-radius: 1.5rem;
+  }
+
+  /* Filter Selectors */
+  .selector-box {
+    border-width: 2.5px;
+    border-radius: 0.95rem;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.95rem;
+  }
+
+  .selector-box label {
+    font-size: 0.85rem;
+  }
+
+  .selector-box select {
+    font-size: 1rem;
+  }
+
+  .filter-separator {
+    font-size: 0.9rem;
+  }
+
+  /* Pill Huruf A-Z: Ditampilkan Grid Rapi Penuh Tanpa Scroll */
+  .pill-scroll {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem;
+    overflow-x: visible;
+    padding: 0.5rem 0 0.25rem;
+  }
+
+  .letter-pill {
+    width: 2.5rem;
+    height: 2.5rem;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 1.1rem;
+    border-radius: 0.8rem;
+    border-width: 2.5px;
+    box-shadow: 0 3px 0 var(--navy);
+    flex-shrink: 0;
+  }
+
+  /* Pill Level 1-5: Ditampilkan Penuh Tanpa Digeser */
+  .sub-nav-wrapper {
+    overflow: visible;
+  }
+
+  .sub-nav-wrapper::after {
+    display: none !important;
+  }
+
+  .sub-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem;
+    overflow-x: visible;
+    padding: 0.35rem 0.25rem 0.5rem;
+  }
+
+  .btn-sublevel {
+    min-height: 52px;
+    padding: 0.65rem 1.15rem;
+    font-size: 0.95rem;
+    border-width: 3px;
+    box-shadow: 0 4px 0 var(--navy);
+    gap: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  /* Panjang Sesi */
+  .session-len-card {
+    padding: 0.75rem 1.25rem;
+    border-radius: 1.5rem;
+  }
+
+  .session-len-card > div:first-child {
+    font-size: 0.95rem;
+  }
+
+  .btn-session-pill {
+    min-height: 48px;
+    min-width: 58px;
+    font-size: 0.95rem;
+    border-width: 2.5px;
+    padding: 0.4rem 0.9rem;
+  }
+
+  /* Flashcard & Mode Kenalan Huruf: Huruf dan Gambar Menonjol */
+  .flashcard-inner {
+    gap: 0.85rem;
+    padding: 0.75rem 0;
+  }
+
+  .card-top-nav {
+    margin-bottom: 0.25rem;
+  }
+
+  .btn-nav-arrow {
+    width: 4rem;
+    height: 4rem;
+    min-width: 64px;
+    min-height: 64px;
+    font-size: 1.4rem;
+    border-radius: 1.15rem;
+    border-width: 3px;
+    box-shadow: 0 5px 0 var(--navy);
+  }
+
+  .card-indicator {
+    font-size: 0.95rem;
+    padding: 0.4rem 1.15rem;
+    border-width: 2px;
+  }
+
+  .big-letter-display {
+    font-size: 9.5rem;
+    margin: 0.35rem 0;
+  }
+
+  .mascot-emoji {
+    font-size: 6.5rem;
+    line-height: 1.15;
+  }
+
+  .mascot-name {
+    font-size: 2.35rem;
+    margin-top: 0.35rem;
+  }
+
+  .mascot-phonetic {
+    font-size: 1.15rem;
+    margin-top: 0.2rem;
+  }
+
+  .audio-btn-large {
+    min-height: 64px;
+    font-size: 1.25rem;
+    padding: 1rem 1.75rem;
+    border-radius: 1.35rem;
+    border-width: 3.5px;
+    box-shadow: 0 6px 0 var(--navy);
+    gap: 0.65rem;
+  }
+
+  /* Kuis: Tebak Huruf & Baca Kata */
+  .quiz-mascot-area {
+    margin: 0.6rem 0;
+  }
+
+  #tebak-mascot-emoji,
+  .quiz-emoji {
+    font-size: 6.5rem;
+  }
+
+  .quiz-question-prompt {
+    font-size: 1.35rem;
+    margin: 0.6rem 0 1.25rem;
+  }
+
+  .star-score-badge {
+    font-size: 1.05rem;
+    padding: 0.35rem 1rem;
+    border-width: 2.5px;
+    box-shadow: 0 3px 0 var(--navy);
+  }
+
+  .btn-reset-session {
+    min-height: 48px;
+    font-size: 0.92rem;
+    padding: 0.4rem 0.9rem;
+    border-width: 2.5px;
+  }
+
+  /* Tombol Pilihan Jawaban: Tinggi Minimal 80px */
+  .quiz-options-grid {
+    gap: 1rem;
+    margin: 0.75rem 0;
+  }
+
+  .btn-choice {
+    min-height: 80px;
+    height: 6.2rem;
+    font-size: 3rem;
+    font-weight: 900;
+    border-radius: 1.5rem;
+    border-width: 3.5px;
+    box-shadow: 0 7px 0 var(--navy);
+  }
+
+  .feedback-banner {
+    font-size: 1.15rem;
+    padding: 0.9rem 1.25rem;
+    border-radius: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  /* Tombol Aksi Utama (Sentuhan Anak >= 64px) */
+  .btn-action {
+    width: 100%;
+    max-width: 420px;
+    min-height: 64px;
+    font-size: 1.25rem;
+    padding: 1rem 1.75rem;
+    border-radius: 1.35rem;
+    border-width: 3.5px;
+    box-shadow: 0 6px 0 var(--navy);
+  }
+
+  /* Baca Kata Level 1: Flashcard Suku Kata */
+  .syllable-display-box {
+    font-size: 6rem;
+    padding: 2rem 3.5rem;
+    border-radius: 2rem;
+    border-width: 4px;
+    box-shadow: 0 8px 0 var(--orange);
+    margin: 0.75rem 0;
+  }
+
+  /* Baca Kata Level 2: Slot Suku Kata */
+  .syllable-slot-box {
+    font-size: 5.5rem;
+    padding: 1.75rem 3.25rem;
+    border-radius: 2rem;
+    border-width: 4px;
+    box-shadow: 0 8px 0 var(--orange);
+    margin: 0.75rem 0;
+  }
+
+  /* Baca Kata Level 3 & 4: Word Slots */
+  .word-slot-container {
+    font-size: 3.75rem;
+    gap: 0.9rem;
+    margin: 1.25rem 0 0.85rem;
+  }
+
+  .word-slot-container.dense {
+    font-size: 3.1rem;
+    gap: 0.55rem;
+  }
+
+  /* Mode Susun Huruf (Level 5): 1 Baris Penuh Tanpa Wrap */
+  .scramble-slots-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0.65rem;
+    margin: 0.85rem 0 0.65rem;
+  }
+
+  .scramble-slot {
+    width: 4rem;
+    height: 4.5rem;
+    min-width: 64px;
+    min-height: 64px;
+    font-size: 2.4rem;
+    border-radius: 1rem;
+    border-width: 3px;
+    flex-shrink: 0;
+  }
+
+  .scramble-pool-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0.65rem;
+    margin: 0.85rem 0 0.5rem;
+  }
+
+  .btn-letter-scramble {
+    width: 4rem;
+    height: 4.5rem;
+    min-width: 64px;
+    min-height: 64px;
+    font-size: 2.2rem;
+    border-radius: 1rem;
+    border-width: 3px;
+    box-shadow: 0 5px 0 var(--navy);
+    flex-shrink: 0;
+  }
+
+  .scramble-actions-row {
+    gap: 0.75rem;
+    margin-top: 0.65rem;
+  }
+
+  .btn-scramble-action {
+    min-height: 48px;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.2rem;
+    border-width: 2.5px;
+  }
+
+  /* Layar Hasil Sesi: Dibatasi Lebarnya Menyerupai Kartu */
+  #subpane-baca-result {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 2rem 2.25rem;
+  }
+
+  #result-icon {
+    font-size: 4.8rem;
+  }
+
+  #result-title {
+    font-size: 2.1rem;
+  }
+
+  #result-subtitle {
+    font-size: 1.15rem;
+  }
+
+  #result-stats-scored,
+  #result-stats-lvl1 {
+    gap: 0.85rem;
+  }
+
+  #result-stats-scored > div,
+  #result-stats-lvl1 > div {
+    gap: 0.85rem;
+  }
+
+  #result-score-ratio,
+  #result-stars,
+  #result-lvl1-viewed,
+  #result-lvl1-understood {
+    font-size: 1.85rem;
+  }
+
+  #result-wrong-box,
+  #result-perfect-box {
+    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
+  }
+
+  .result-eval-badge {
+    font-size: 0.95rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 0.65rem;
+  }
+
+  #subpane-baca-result .btn-action {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE ADAPTIVE LAYOUT: LAPTOP & DESKTOP (1024px ke atas, breakpoint min-width: 1000px)
+   ========================================================================== */
+@media (min-width: 1000px) {
+  body {
+    padding: 1.75rem 2rem;
+  }
+
+  .app-container {
+    max-width: 860px;
+    gap: 1.5rem;
+  }
+
+  footer.app-footer {
+    max-width: 860px;
+    padding: 2rem 0 1.5rem;
+  }
+
+  h1.app-title {
+    font-size: 3.1rem;
+  }
+
+  p.app-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .tab-btn {
+    height: 3.8rem;
+    min-height: 60px;
+    font-size: 1.15rem;
+    border-radius: 1.35rem;
+  }
+
+  .chunky-card {
+    border-width: 4px;
+    border-radius: 2.25rem;
+    box-shadow: 0 10px 0 var(--navy);
+    padding: 1.75rem 2.25rem;
+  }
+
+  .letter-pill {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.25rem;
+  }
+
+  .btn-sublevel {
+    font-size: 1rem;
+    padding: 0.75rem 1.4rem;
+  }
+
+  .btn-nav-arrow {
+    width: 4.25rem;
+    height: 4.25rem;
+    font-size: 1.5rem;
+  }
+
+  .big-letter-display {
+    font-size: 11rem;
+  }
+
+  .mascot-emoji,
+  #tebak-mascot-emoji,
+  .quiz-emoji {
+    font-size: 7.5rem;
+  }
+
+  .mascot-name {
+    font-size: 2.65rem;
+  }
+
+  .mascot-phonetic {
+    font-size: 1.25rem;
+  }
+
+  .audio-btn-large {
+    min-height: 68px;
+    font-size: 1.35rem;
+    padding: 1.1rem 2.25rem;
+    border-width: 4px;
+    box-shadow: 0 7px 0 var(--navy);
+  }
+
+  .quiz-question-prompt {
+    font-size: 1.5rem;
+  }
+
+  .btn-choice {
+    min-height: 90px;
+    height: 7rem;
+    font-size: 3.4rem;
+    border-radius: 1.75rem;
+    border-width: 4px;
+    box-shadow: 0 8px 0 var(--navy);
+  }
+
+  .btn-action {
+    max-width: 450px;
+    min-height: 68px;
+    font-size: 1.35rem;
+    border-width: 4px;
+    box-shadow: 0 7px 0 var(--navy);
+  }
+
+  .syllable-display-box {
+    font-size: 6.5rem;
+    padding: 2.25rem 4rem;
+    box-shadow: 0 10px 0 var(--orange);
+  }
+
+  .syllable-slot-box {
+    font-size: 6rem;
+    padding: 2rem 3.75rem;
+    box-shadow: 0 10px 0 var(--orange);
+  }
+
+  .word-slot-container {
+    font-size: 4.25rem;
+    gap: 1.1rem;
+  }
+
+  .word-slot-container.dense {
+    font-size: 3.5rem;
+    gap: 0.7rem;
+  }
+
+  .scramble-slots-row,
+  .scramble-pool-row {
+    gap: 0.85rem;
+  }
+
+  .scramble-slot {
+    width: 4.4rem;
+    height: 5rem;
+    min-width: 70px;
+    min-height: 70px;
+    font-size: 2.8rem;
+    border-radius: 1.15rem;
+    border-width: 3.5px;
+  }
+
+  .btn-letter-scramble {
+    width: 4.4rem;
+    height: 5rem;
+    min-width: 70px;
+    min-height: 70px;
+    font-size: 2.6rem;
+    border-radius: 1.15rem;
+    border-width: 3.5px;
+    box-shadow: 0 6px 0 var(--navy);
+  }
+
+  #subpane-baca-result {
+    max-width: 620px;
+  }
+
+  #result-title {
+    font-size: 2.3rem;
+  }
+
+  #result-subtitle {
+    font-size: 1.25rem;
+  }
+
+  #subpane-baca-result .btn-action {
+    max-width: 440px;
+    min-height: 68px;
+    font-size: 1.3rem;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE ADAPTIVE LAYOUT: TABLET LANDSCAPE (Mendatar / Height Terbatas)
+   ========================================================================== */
+@media (min-width: 750px) and (max-height: 768px) {
+  body {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .app-container {
+    gap: 0.75rem;
+  }
+
+  header.app-header {
+    gap: 0.25rem;
+  }
+
+  h1.app-title {
+    font-size: 2.35rem;
+  }
+
+  p.app-subtitle {
+    font-size: 1rem;
+  }
+
+  .chunky-card {
+    padding: 1rem 1.5rem;
+  }
+
+  .flashcard-inner {
+    gap: 0.45rem;
+    padding: 0.25rem 0;
+  }
+
+  .big-letter-display {
+    font-size: 7.5rem;
+    margin: 0;
+  }
+
+  .mascot-emoji {
+    font-size: 5rem;
+  }
+
+  .mascot-name {
+    font-size: 2rem;
+    margin-top: 0.15rem;
+  }
+
+  .quiz-mascot-area {
+    margin: 0.35rem 0;
+  }
+
+  #tebak-mascot-emoji,
+  .quiz-emoji {
+    font-size: 5.5rem;
+  }
+
+  .quiz-question-prompt {
+    font-size: 1.15rem;
+    margin: 0.35rem 0 0.75rem;
+  }
+
+  .quiz-options-grid {
+    margin: 0.4rem 0;
+  }
+
+  .btn-choice {
+    height: 5.5rem;
+    min-height: 72px;
+    font-size: 2.75rem;
+  }
+
+  .word-slot-container {
+    font-size: 3.25rem;
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .syllable-display-box,
+  .syllable-slot-box {
+    font-size: 4.8rem;
+    padding: 1.25rem 2.5rem;
+    margin: 0.35rem 0;
+  }
+
+  .audio-btn-large {
+    min-height: 56px;
+    font-size: 1.15rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  footer.app-footer {
+    padding: 0.75rem 0 0.5rem;
+  }
+}
